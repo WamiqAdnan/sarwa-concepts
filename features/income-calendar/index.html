@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="data:,">
+<title>Passive Income Calendar · Sarwa Trade concept</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@400;600&display=swap');
+
+:root {
+  --sarwa-green-900: #07351A;
+  --sarwa-green-700: #106E37;
+  --sarwa-green-600: #0B913B;
+  --sarwa-green-500: #2F9E5D;
+  --sarwa-lime-500:  #70BF2D;
+  --sarwa-lime-200:  #C5FF94;
+  --sarwa-mint-100:  #CFEAD9;
+  --ink:        #0A140A;
+  --surface:    #F8F9F9;
+  --card:       #FFFFFF;
+  --border:     #E6E7E6;
+  --border-strong: #CED0CE;
+  --text-muted: #848984;
+  /* inferred: darker step of --text-muted so small captions pass 4.5:1 on white and surface */
+  --text-secondary: #5D625D;
+  --negative:   #E5484D;
+  --invest: #7DC3D2;  --invest-tint: #CBE7ED;
+  --save:   #FF9B82;  --save-tint:   #FFD7CD;
+  --trade:  #FFB932;
+  --radius-sm: 8px;  --radius-md: 12px;  --radius-pill: 20px;  --radius-full: 999px;
+  --shadow-card: 0 0 8px rgba(99,99,99,0.05);
+  --font-display: 'PP Fragment Serif', 'Fraunces', Georgia, serif;
+  --font-ui: 'Soleil', 'Figtree', -apple-system, 'Segoe UI', sans-serif;
+  --font-ar: '29LT Zarid Sans', 'IBM Plex Sans Arabic', sans-serif;
+  --ease: cubic-bezier(.2,.8,.2,1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--surface); color: var(--ink);
+  font-family: var(--font-ui); font-size: 16px; line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; }
+:focus-visible { outline: 2px solid var(--sarwa-green-700); outline-offset: 2px; border-radius: 6px; }
+.num { font-variant-numeric: tabular-nums; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- presentation page ---------- */
+.page {
+  max-width: 1320px; margin: 0 auto; padding: 40px 56px 24px;
+  display: grid; grid-template-columns: minmax(0, 40%) minmax(0, 1fr); gap: 56px; align-items: start;
+}
+.pitch { padding-top: 24px; }
+.pitch-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.kicker { font-size: 14px; font-weight: 600; color: var(--sarwa-green-700); display: inline-flex; gap: 8px; align-items: center; }
+.kicker .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--trade); }
+.pitch h1 { font-family: var(--font-display); font-weight: 700; font-size: 44px; line-height: 52px; margin: 0 0 12px; letter-spacing: -0.01em; }
+.tagline { font-size: 18px; line-height: 26px; margin: 0 0 28px; color: var(--ink); max-width: 34ch; }
+.pitch h2 { font-family: var(--font-display); font-weight: 500; font-size: 18px; line-height: 25px; margin: 24px 0 6px; }
+.pitch p, .pitch li { font-size: 15px; line-height: 23px; color: #2A332A; margin: 0; }
+.pitch ul { margin: 0; padding-inline-start: 18px; display: grid; gap: 6px; }
+.pitch code { font-size: 13px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; }
+.pitch-more > summary { display: none; }
+.lang {
+  display: inline-flex; border: 1px solid var(--border-strong); border-radius: var(--radius-full); padding: 3px; background: var(--card);
+}
+.lang button { min-width: 44px; height: 36px; border-radius: var(--radius-full); font-size: 14px; font-weight: 600; }
+.lang button[aria-pressed="true"] { background: var(--sarwa-green-900); color: var(--surface); }
+.lang button:last-child { font-family: var(--font-ar); }
+
+.stage { display: flex; flex-direction: column; align-items: center; gap: 18px; position: sticky; top: 16px; }
+.device {
+  width: 414px; padding: 12px; border-radius: 60px; background: #0E1A10;
+  box-shadow: 0 30px 60px -20px rgba(7,53,26,.28), 0 0 0 1px #24302A inset;
+  position: relative;
+}
+.device::before {
+  content: ""; position: absolute; top: 23px; left: 50%; width: 120px; height: 34px; margin-left: -60px;
+  border-radius: 20px; background: #000; z-index: 5; pointer-events: none;
+}
+.screen { width: 390px; height: 844px; border-radius: 48px; overflow: hidden; position: relative; background: var(--surface); }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 470px; }
+.chips button {
+  min-height: 44px; padding: 0 14px; border-radius: var(--radius-full); background: var(--card);
+  border: 1px solid var(--border-strong); font-size: 14px; font-weight: 600; transition: background .18s, color .18s;
+}
+.chips button:hover { background: var(--border); }
+.chips button[aria-current="true"] { background: var(--sarwa-green-900); color: var(--surface); border-color: var(--sarwa-green-900); }
+.foot { max-width: 1320px; margin: 0 auto; padding: 8px 56px 32px; font-size: 12px; line-height: 18px; color: var(--text-secondary); }
+.foot p { margin: 0 0 4px; }
+
+@media (min-width: 1024px) and (max-height: 1000px) { .device { zoom: .8; } .stage { gap: 12px; top: 8px; } .page { padding-top: 28px; } }
+@media (max-width: 1180px) { .page { padding: 32px 32px 16px; gap: 36px; } .foot { padding-inline: 32px; } .pitch h1 { font-size: 38px; line-height: 46px; } }
+@media (max-width: 1023px) {
+  .page { grid-template-columns: 1fr; }
+  .stage { position: static; }
+  .pitch { max-width: 640px; margin: 0 auto; padding-top: 0; }
+}
+@media (max-width: 767px) {
+  .page { padding: 0; gap: 0; }
+  .pitch { padding: 16px 16px 12px; border-bottom: 1px solid var(--border); background: var(--card); }
+  .pitch-top { margin-bottom: 8px; }
+  .pitch h1 { font-size: 26px; line-height: 32px; margin-bottom: 4px; }
+  .tagline { font-size: 15px; line-height: 21px; margin-bottom: 8px; }
+  .pitch-more > summary {
+    display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; font-size: 14px; color: var(--sarwa-green-700); cursor: pointer; list-style: none;
+  }
+  .pitch-more > summary::-webkit-details-marker { display: none; }
+  .pitch-more > summary::after { content: "›"; margin-inline-start: 6px; transition: transform .2s; }
+  .pitch-more[open] > summary::after { transform: rotate(90deg); }
+  .stage { gap: 12px; }
+  .device { width: 100%; padding: 0; border-radius: 0; background: none; box-shadow: none; }
+  .device::before { display: none; }
+  .screen { width: 100%; height: 100svh; min-height: 620px; border-radius: 0; }
+  .chips { padding: 0 16px; max-width: 100%; justify-content: flex-start; }
+  .foot { padding: 12px 16px 28px; }
+}
+
+/* ---------- app ---------- */
+.app { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--surface); color: var(--ink); overflow: hidden; }
+.app[dir="rtl"] { font-family: var(--font-ar); }
+.statusbar { height: 54px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 6px 30px 0 40px; font-size: 16px; font-weight: 600; }
+.statusbar svg { display: block; }
+.sb-icons { display: flex; gap: 6px; align-items: center; }
+@media (max-width: 767px) { .statusbar { display: none; } }
+.stack { position: relative; flex: 1; overflow: hidden; }
+.scr { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--surface); transition: transform .22s var(--ease), opacity .22s var(--ease); will-change: transform; }
+.scr.enter { transform: translateX(100%); }
+.scr.leave { transform: translateX(-24%); opacity: 0; }
+.scr.enter-back { transform: translateX(-24%); opacity: 0; }
+.scr.leave-back { transform: translateX(100%); }
+[dir="rtl"] .scr.enter, [dir="rtl"] .scr.leave-back { transform: translateX(-100%); }
+[dir="rtl"] .scr.leave, [dir="rtl"] .scr.enter-back { transform: translateX(24%); }
+@media (prefers-reduced-motion: reduce) { .scr, .sheet, .scrim, .toast { transition: none !important; } }
+.body { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 0 16px 28px; scrollbar-width: none; overscroll-behavior: contain; }
+.body::-webkit-scrollbar { display: none; }
+
+.hdr { height: 52px; flex: none; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; padding: 0 4px; }
+.hdr h1 { margin: 0; text-align: center; font-size: 17px; font-weight: 700; }
+.hdr h1:focus { outline: none; }
+.icon-btn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; transition: background .18s; }
+.icon-btn:hover { background: var(--border); }
+[dir="rtl"] .flip { transform: scaleX(-1); }
+
+.top { display: flex; align-items: center; justify-content: space-between; padding: 4px 16px 6px; }
+.wordmark { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; color: var(--sarwa-green-900); }
+.pills { display: flex; gap: 2px; padding: 6px 12px 12px; overflow-x: auto; scrollbar-width: none; }
+.pill, .seg button {
+  position: relative; height: 36px; padding: 0 12px; border-radius: var(--radius-pill); font-size: 14px; font-weight: 600;
+  white-space: nowrap; color: var(--ink); transition: background .18s, color .18s;
+}
+.pill::after, .seg button::after { content: ""; position: absolute; inset: -4px 0; }
+.pill:hover, .seg button:hover { background: var(--border); }
+.pill[aria-current="true"], .seg button[aria-pressed="true"] { background: var(--sarwa-green-900); color: var(--surface); }
+.seg { display: inline-flex; gap: 2px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 3px; }
+.seg.full { display: flex; }
+.seg.full button { flex: 1; }
+
+.card { background: var(--card); border-radius: var(--radius-sm); box-shadow: var(--shadow-card); padding: 16px; margin-bottom: 12px; }
+.label { font-size: 13px; color: var(--text-secondary); }
+.big { font-size: 32px; line-height: 38px; font-weight: 700; letter-spacing: -0.01em; }
+.pos { color: var(--sarwa-green-500); }
+.neg { color: var(--negative); }
+.pos-t { color: var(--sarwa-green-700); } /* AA green for small text */
+.row3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+.row3 b { display: block; font-size: 15px; margin-top: 2px; }
+.sec-h { display: flex; justify-content: space-between; align-items: baseline; margin: 20px 0 10px; }
+.sec-h h2 { margin: 0; font-size: 17px; font-weight: 700; }
+.sec-h .label { font-size: 13px; }
+
+/* entry card */
+.entry { display: block; width: 100%; text-align: start; position: relative; overflow: hidden; border: 1px solid var(--sarwa-mint-100); transition: box-shadow .18s, transform .18s; }
+.entry:hover { box-shadow: 0 4px 16px rgba(7,53,26,.08); }
+.entry:active { transform: scale(.99); }
+.entry-top { display: flex; gap: 12px; align-items: flex-start; }
+.entry-ic { width: 40px; height: 40px; border-radius: 50%; background: var(--sarwa-mint-100); display: grid; place-items: center; flex: none; color: var(--sarwa-green-900); }
+.entry h3 { margin: 2px 0 2px; font-family: var(--font-display); font-weight: 500; font-size: 18px; line-height: 24px; }
+.entry p { margin: 0; font-size: 13px; color: var(--text-secondary); }
+.chip-new { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--sarwa-lime-200); color: var(--sarwa-green-900); vertical-align: 2px; margin-inline-start: 6px; font-family: var(--font-ui); }
+.spark { display: flex; align-items: flex-end; gap: 4px; height: 34px; margin-top: 14px; }
+.spark i { flex: 1; background: var(--sarwa-mint-100); border-radius: 2px 2px 0 0; min-height: 3px; }
+.spark i.on { background: var(--sarwa-green-500); }
+.spark-l { display: flex; gap: 4px; margin-top: 4px; font-size: 10px; color: var(--text-secondary); }
+.spark-l span { flex: 1; text-align: center; }
+
+.search { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 48px; padding: 0 16px; background: var(--card); border-radius: var(--radius-sm); box-shadow: var(--shadow-card); color: var(--text-secondary); font-size: 15px; margin: 8px 0 10px; }
+.themes { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px 4px; }
+.theme { flex: none; height: 44px; padding: 0 14px; border-radius: var(--radius-sm); background: var(--card); box-shadow: var(--shadow-card); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+
+.list { background: var(--card); border-radius: var(--radius-sm); box-shadow: var(--shadow-card); }
+.li { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 64px; padding: 10px 16px; text-align: start; border-top: 1px solid var(--border); transition: background .15s; }
+.li:first-child { border-top: 0; }
+button.li:hover { background: #FBFCFB; }
+.li .mid { flex: 1; min-width: 0; }
+.li .t1 { font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 6px; }
+.li .t2 { font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.li .end { text-align: end; flex: none; }
+.li .end b { display: block; font-size: 15px; }
+.li .end span { font-size: 13px; }
+.logo { width: 40px; height: 40px; border-radius: 50%; flex: none; display: grid; place-items: center; background: var(--tint, var(--border)); font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--sarwa-green-900); }
+.logo.sm { width: 32px; height: 32px; font-size: 13px; }
+.badge { display: inline-flex; align-items: center; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--sarwa-mint-100); color: var(--sarwa-green-900); font-family: var(--font-ui); }
+.badge.grey { background: var(--border); color: var(--ink); }
+
+.tabbar { flex: none; display: flex; background: var(--card); border-top: 1px solid var(--border); padding: 6px 4px 26px; }
+@media (max-width: 767px) { .tabbar { padding-bottom: max(10px, env(safe-area-inset-bottom)); } }
+.tab { flex: 1; min-height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 600; color: var(--text-muted); }
+.tab[aria-current="page"] { color: var(--sarwa-green-900); }
+
+/* calendar screen */
+.hero { padding: 18px 16px 16px; }
+.hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.hero .amt { font-family: var(--font-display); font-weight: 500; font-size: 40px; line-height: 46px; letter-spacing: -0.02em; margin: 4px 0 4px; }
+.hero .sub { font-size: 13px; color: var(--text-secondary); }
+.taxnote { display: flex; gap: 8px; align-items: flex-start; font-size: 12px; line-height: 17px; color: var(--text-secondary); margin-top: 12px; padding: 10px 12px; background: var(--surface); border-radius: var(--radius-sm); }
+.taxnote svg { flex: none; margin-top: 1px; }
+.monthbar { display: flex; align-items: center; justify-content: space-between; margin: 4px -6px 6px; }
+.monthbar h2 { margin: 0; font-size: 17px; font-weight: 700; }
+.monthbar .mt { font-size: 13px; color: var(--text-secondary); text-align: center; }
+.icon-btn[disabled] { opacity: .3; cursor: default; }
+.icon-btn[disabled]:hover { background: none; }
+.dows, .grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; }
+.dows span { text-align: center; font-size: 11px; font-weight: 600; color: var(--text-secondary); height: 22px; }
+.day {
+  height: 58px; border-radius: var(--radius-sm); display: flex; flex-direction: column; align-items: center; gap: 2px; padding-top: 5px;
+  font-variant-numeric: tabular-nums; transition: background .15s, color .15s;
+}
+.day:hover { background: var(--surface); }
+.day .n { font-size: 15px; font-weight: 600; width: 28px; height: 24px; line-height: 24px; border-radius: var(--radius-full); text-align: center; }
+.day.past .n { color: var(--text-secondary); font-weight: 400; }
+.day.today .n { box-shadow: inset 0 0 0 1.5px var(--sarwa-green-900); }
+.day .pa { font-size: 10.5px; font-weight: 700; line-height: 14px; padding: 0 4px; border-radius: 4px; background: var(--sarwa-mint-100); color: var(--sarwa-green-900); }
+.day .xr { display: flex; gap: 3px; height: 8px; align-items: center; }
+.day .xr i { width: 7px; height: 7px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--ink); }
+.day[aria-pressed="true"] { background: var(--sarwa-green-900); color: var(--surface); }
+.day[aria-pressed="true"] .n { color: var(--surface); box-shadow: none; }
+.day[aria-pressed="true"].today .n { box-shadow: inset 0 0 0 1.5px var(--sarwa-lime-200); }
+.day[aria-pressed="true"] .pa { background: var(--sarwa-lime-200); }
+.day[aria-pressed="true"] .xr i { box-shadow: inset 0 0 0 1.5px var(--surface); }
+.legend { display: flex; gap: 16px; font-size: 12px; color: var(--text-secondary); margin: 10px 2px 0; flex-wrap: wrap; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend .pa { font-size: 10.5px; font-weight: 700; padding: 0 4px; border-radius: 4px; background: var(--sarwa-mint-100); color: var(--sarwa-green-900); }
+.legend .ring { width: 8px; height: 8px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--ink); }
+.dp-h { display: flex; align-items: center; justify-content: space-between; margin: 18px 0 8px; }
+.dp-h h3 { margin: 0; font-size: 15px; font-weight: 700; }
+.empty { padding: 18px 16px; font-size: 14px; color: var(--text-secondary); }
+.empty b { color: var(--ink); font-weight: 600; }
+.kind { font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
+.kind .ring { width: 8px; height: 8px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--ink); }
+.kind .fill { width: 8px; height: 8px; border-radius: 50%; background: var(--sarwa-green-500); }
+
+/* 12-month bars */
+.bars { position: relative; display: flex; gap: 4px; height: 190px; padding-top: 26px; touch-action: pan-y; }
+.bar { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-radius: 6px; }
+.bar .col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; padding: 0 3px; }
+.bar .w { background: var(--sarwa-mint-100); border-radius: 4px 4px 0 0; transition: height .22s var(--ease); }
+.bar .nt { background: var(--sarwa-green-500); border-radius: 4px 4px 0 0; transition: height .22s var(--ease), background .15s; }
+.bar .w + .nt { border-radius: 0; }
+.bar .lbl { height: 22px; line-height: 22px; font-size: 11px; font-weight: 600; color: var(--text-secondary); text-align: center; }
+.bar[aria-pressed="true"] .nt { background: var(--sarwa-green-900); }
+.bar[aria-pressed="true"] .lbl { color: var(--ink); }
+.bar .tip { align-self: center; margin-bottom: 4px; font-size: 12px; font-weight: 700; white-space: nowrap; display: none; background: var(--ink); color: var(--surface); padding: 2px 6px; border-radius: 4px; }
+.bar.l .tip { align-self: flex-start; margin-inline-start: -2px; } .bar.r .tip { align-self: flex-end; margin-inline-end: -2px; }
+.bar[aria-pressed="true"] .tip { display: block; }
+.avg { position: absolute; inset-inline: 0; border-top: 1.5px dashed var(--border-strong); pointer-events: none; }
+.yr-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--text-secondary); margin-top: 8px; }
+.yr-legend span { display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+.yr-legend i { width: 10px; height: 10px; border-radius: 2px; }
+.yr-legend i.dash { height: 0; width: 14px; border-top: 1.5px dashed var(--text-secondary); border-radius: 0; }
+[dir="rtl"] .body :is(p, h2, h3, .sub, .label, .t1, .t2, .mt, .taxnote span, .seg button, .fund-line, .empty, .help, .linked, .kind, .delta, .tip, .lbl, .val, .amt, .big, b, .end) { unicode-bidi: plaintext; }
+[dir="rtl"] .sheet :is(p, h2, h3, .label, .help, .seg button, .quick button) { unicode-bidi: plaintext; }
+
+.teaser { display: flex; align-items: center; gap: 12px; width: 100%; text-align: start; background: var(--sarwa-green-900); color: var(--surface); border-radius: var(--radius-sm); padding: 16px; margin: 16px 0 12px; position: relative; overflow: hidden; }
+.teaser::before { content: ""; position: absolute; width: 160px; height: 160px; inset-inline-end: -50px; top: -60px; background: radial-gradient(circle, rgba(197,255,148,.45), transparent 65%); pointer-events: none; }
+.teaser h3 { margin: 0 0 2px; font-family: var(--font-display); font-weight: 500; font-size: 17px; line-height: 23px; }
+.teaser p { margin: 0; font-size: 13px; color: var(--sarwa-mint-100); }
+.teaser .mid { flex: 1; position: relative; }
+.disc { font-size: 11.5px; line-height: 17px; color: var(--text-secondary); margin: 14px 2px 0; }
+.disc p { margin: 0 0 6px; }
+
+/* holding */
+.h-head { display: flex; align-items: center; gap: 12px; padding: 6px 0 14px; }
+.h-head .logo { width: 48px; height: 48px; font-size: 20px; }
+.h-head h2 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 22px; line-height: 28px; }
+.h-head .t2 { font-size: 13px; color: var(--text-secondary); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.kv { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; }
+.kv .label { font-size: 12px; }
+.kv b { display: block; font-size: 16px; margin-top: 2px; }
+.upcoming { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 14px -16px 0; padding: 0 16px 2px; }
+.up { flex: none; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; min-width: 86px; }
+.up .label { font-size: 11px; }
+.up b { display: block; font-size: 14px; }
+.switch-row { display: flex; align-items: center; gap: 12px; }
+.switch-row .mid { flex: 1; }
+.switch-row h3 { margin: 0; font-size: 15px; font-weight: 700; }
+.switch-row p { margin: 2px 0 0; font-size: 13px; color: var(--text-secondary); }
+.linked { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--sarwa-green-700); margin-top: 6px; }
+.sw { position: relative; width: 52px; height: 32px; border-radius: 16px; background: var(--border-strong); flex: none; transition: background .2s; }
+.sw::before { content: ""; position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform .2s var(--ease); }
+.sw::after { content: ""; position: absolute; inset: -6px -2px; }
+.sw[aria-checked="true"] { background: var(--sarwa-green-900); }
+.sw[aria-checked="true"]::before { transform: translateX(20px); }
+[dir="rtl"] .sw::before { left: auto; right: 3px; }
+[dir="rtl"] .sw[aria-checked="true"]::before { transform: translateX(-20px); }
+.drip-note { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 16px; border-radius: var(--radius-sm); font-weight: 600; font-size: 16px; transition: background .18s, color .18s; }
+.btn.primary { background: var(--sarwa-green-900); color: var(--surface); }
+.btn.primary:hover { background: var(--sarwa-green-700); }
+.btn.primary[disabled] { background: var(--border-strong); color: var(--text-secondary); cursor: not-allowed; }
+.btn.secondary { background: var(--card); border: 1px solid var(--sarwa-green-900); color: var(--sarwa-green-900); }
+.btn.secondary:hover { background: var(--border); }
+.btn.ghost { color: var(--sarwa-green-900); min-height: 44px; padding: 0 8px; font-size: 14px; }
+.btn.block { width: 100%; }
+.alert-li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--border); font-size: 14px; }
+.alert-li:first-of-type { border-top: 0; }
+.alert-li .mid { flex: 1; }
+.cta { flex: none; padding: 12px 16px 28px; background: var(--surface); border-top: 1px solid var(--border); }
+@media (max-width: 767px) { .cta { padding-bottom: max(14px, env(safe-area-inset-bottom)); } }
+
+/* covers */
+.cov-hero { background: var(--sarwa-green-900); color: var(--surface); border-radius: var(--radius-sm); padding: 18px 16px; margin: 4px 0 12px; position: relative; overflow: hidden; }
+.cov-hero::after { content: ""; position: absolute; width: 220px; height: 220px; inset-inline-end: -80px; bottom: -110px; background: radial-gradient(circle, rgba(197,255,148,.4), transparent 65%); pointer-events: none; }
+.cov-hero .label { color: var(--sarwa-mint-100); }
+.cov-hero .amt { font-family: var(--font-display); font-weight: 500; font-size: 36px; line-height: 42px; margin: 2px 0; }
+.cov-hero h2 { margin: 10px 0 0; font-family: var(--font-display); font-weight: 500; font-size: 19px; line-height: 25px; position: relative; z-index: 1; }
+.cov-hero .sub { font-size: 13px; color: var(--sarwa-mint-100); position: relative; z-index: 1; }
+.cost { padding: 12px 0; border-top: 1px solid var(--border); }
+.cost:first-child { border-top: 0; padding-top: 0; }
+.cost-top { display: flex; align-items: center; gap: 10px; }
+.cost-ic { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; flex: none; font-size: 13px; font-weight: 700; color: var(--sarwa-green-900); }
+.cost-top .mid { flex: 1; min-width: 0; }
+.cost-top b { font-size: 15px; display: block; }
+.cost-top .label { font-size: 12px; }
+.cost-top .end { font-size: 13px; font-weight: 700; text-align: end; }
+.meter { height: 8px; border-radius: 4px; background: var(--border); margin-top: 10px; overflow: hidden; }
+.meter i { display: block; height: 100%; border-radius: 4px; background: var(--sarwa-green-500); transition: width .22s var(--ease); }
+.meter i.full { background: var(--sarwa-green-900); }
+.slider-wrap { margin-top: 4px; }
+.slider-wrap .val { font-size: 28px; font-weight: 700; margin: 2px 0 2px; }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; background: transparent; margin: 4px 0 0; }
+input[type=range]::-webkit-slider-runnable-track { height: 8px; border-radius: 4px; background: linear-gradient(to right, var(--sarwa-green-500) 0 var(--p, 0%), var(--border) var(--p, 0%) 100%); }
+input[type=range]::-moz-range-track { height: 8px; border-radius: 4px; background: var(--border); }
+input[type=range]::-moz-range-progress { height: 8px; border-radius: 4px; background: var(--sarwa-green-500); }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; margin-top: -10px; border-radius: 50%; background: #fff; border: 2px solid var(--sarwa-green-900); box-shadow: 0 2px 6px rgba(7,53,26,.2); }
+input[type=range]::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 2px solid var(--sarwa-green-900); }
+[dir="rtl"] input[type=range]::-webkit-slider-runnable-track { background: linear-gradient(to left, var(--sarwa-green-500) 0 var(--p, 0%), var(--border) var(--p, 0%) 100%); }
+.ticks { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-secondary); }
+.proj { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.proj > div { background: var(--surface); border-radius: var(--radius-sm); padding: 10px 12px; }
+.proj b { display: block; font-size: 18px; margin-top: 2px; }
+.proj .delta { font-size: 12px; font-weight: 700; }
+.fund-line { font-size: 13px; color: var(--text-secondary); margin-top: 10px; line-height: 19px; }
+.quick { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.quick button { min-height: 44px; padding: 0 12px; border-radius: var(--radius-pill); border: 1px solid var(--border-strong); font-size: 13px; font-weight: 600; background: var(--card); }
+.quick button:hover { background: var(--border); }
+
+/* sheet */
+.scrim { position: absolute; inset: 0; background: rgba(10,20,10,.4); opacity: 0; transition: opacity .22s; z-index: 20; }
+.sheet { position: absolute; inset-inline: 0; bottom: 0; z-index: 21; background: var(--card); border-radius: 20px 20px 0 0; padding: 8px 16px 28px; transform: translateY(100%); transition: transform .24s var(--ease); max-height: 92%; overflow-y: auto; }
+.sheet-open .scrim { opacity: 1; }
+.sheet-open .sheet { transform: none; }
+.grab { width: 40px; height: 5px; border-radius: 3px; background: var(--border-strong); margin: 0 auto 10px; }
+.sheet-h { display: flex; align-items: center; justify-content: space-between; }
+.sheet-h h2 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 22px; }
+.sheet .label { margin: 2px 0 14px; }
+.field { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+.field .box { flex: 1; display: flex; align-items: center; height: 56px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); padding: 0 14px; font-size: 22px; font-weight: 700; transition: border-color .15s; }
+.field .box:focus-within { border-color: var(--sarwa-green-900); box-shadow: 0 0 0 3px var(--sarwa-mint-100); }
+.field .box.err { border-color: var(--negative); }
+.field input { border: 0; outline: 0; width: 100%; background: none; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.step { width: 48px; height: 56px; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); font-size: 22px; font-weight: 600; }
+.step:hover { background: var(--border); }
+.help { font-size: 13px; margin-top: 8px; min-height: 19px; color: var(--text-secondary); }
+.help.err { color: #B4232A; }
+.sheet .switch-row { margin: 18px 0 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.dirs { display: flex; gap: 8px; margin-top: 14px; }
+
+.toast { position: absolute; inset-inline: 16px; bottom: 96px; z-index: 30; background: var(--ink); color: var(--surface); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 14px; opacity: 0; transform: translateY(8px); transition: opacity .2s, transform .2s; pointer-events: none; }
+.toast.show { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="pitch">
+    <div class="pitch-top">
+      <span class="kicker"><span class="dot" aria-hidden="true"></span>Sarwa Trade concept</span>
+      <div class="lang" role="group" aria-label="Prototype language direction">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ar" aria-pressed="false" aria-label="Arabic, right to left">ع</button>
+      </div>
+    </div>
+    <h1>Passive Income Calendar</h1>
+    <p class="tagline">See when your dividends land, what you keep after tax, and what they pay for.</p>
+    <details class="pitch-more" id="pitchMore">
+      <summary>Read the pitch</summary>
+      <h2>The problem</h2>
+      <p>Sarwa Trade users can reinvest dividends and browse a "Dividend" theme, but nothing tells them when a payout lands, how much it will be after US withholding, or which date they must hold a stock through to get paid. Market Alerts only fire on "significant" moves, so there's no way to say "tell me when KO hits $65".</p>
+      <h2>Why it fits Sarwa</h2>
+      <p>It turns two features Sarwa already has (dividend reinvesting and the Dividend list) into a reason to open the app every month. Showing net income after the 30% US withholding that UAE residents usually face is the honest, local answer that US apps skip. "Your dividends cover your Salik commute" is plain-English money talk in Sarwa's voice.</p>
+      <h2>How it works</h2>
+      <ul>
+        <li>A card on the Trade summary shows this month's estimated income and a 12-month sparkline.</li>
+        <li>A month calendar marks ex-dividend dates (ring) and pay dates (amount); a 12-month bar view shows the year. One Net/Gross toggle drives every figure.</li>
+        <li>Each holding shows yield, frequency, next ex-date, a custom price-target alert and the existing "Reinvest dividends" setting.</li>
+        <li>"What it covers" maps monthly net income to UAE costs in AED; a SCHD slider shows what an extra deposit adds.</li>
+      </ul>
+      <h2>Frontend notes</h2>
+      <ul>
+        <li>One <code>incomeSchedule(positions, window)</code> selector feeds the card, grid, bars and coverage, in integer cents, so every total adds up. Net vs gross is a view flag, not a second dataset.</li>
+        <li>The calendar is a roving-tabindex grid: arrow keys move across days and months, each day has a spoken label, and ex vs pay differ by shape, not only colour.</li>
+        <li>Charts are CSS flex bars, not canvas, so <code>dir="rtl"</code> mirrors them for free; layout uses logical properties throughout.</li>
+        <li>The slider re-renders only its results region, so focus and drag survive; dividend data would be cached per symbol and invalidated on each new declaration.</li>
+      </ul>
+    </details>
+  </header>
+
+  <section class="stage" aria-label="Interactive prototype">
+    <div class="device">
+      <div class="screen">
+        <div class="app" id="app" dir="ltr" lang="en">
+          <div class="statusbar" aria-hidden="true">
+            <span class="num">9:41</span>
+            <span class="sb-icons">
+              <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg>
+              <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.5c2.3 0 4.4.9 6 2.4l1.2-1.3A10.3 10.3 0 0 0 8 .7 10.3 10.3 0 0 0 .8 3.6L2 4.9a8.6 8.6 0 0 1 6-2.4zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.2-1.3A6.7 6.7 0 0 0 8 4.3c-1.8 0-3.4.7-4.6 1.8l1.2 1.3c.9-.8 2.1-1.3 3.4-1.3zM8 9.6l2-2.1a2.9 2.9 0 0 0-4 0z" fill="currentColor"/></svg>
+              <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"/><path d="M25 4.5v4a2 2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+            </span>
+          </div>
+          <div class="stack" id="stack"></div>
+          <div id="sheetLayer"></div>
+          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+    <nav class="chips" aria-label="Jump to screen" id="chips">
+      <button type="button" data-chip="trade">Trade summary</button>
+      <button type="button" data-chip="calendar">Income calendar</button>
+      <button type="button" data-chip="year">12-month view</button>
+      <button type="button" data-chip="holding">Holding detail</button>
+      <button type="button" data-chip="alert">Price-target alert</button>
+      <button type="button" data-chip="covers">What it covers</button>
+    </nav>
+  </section>
+</div>
+<footer class="foot">
+  <p>Concept prototype by a job applicant. Not affiliated with or endorsed by Sarwa. Figures are illustrative.</p>
+  <p>All investing involves risk, including the possible loss of money you invest. Past performance is no guarantee of future results. Dividends are not guaranteed. Sarwa does not hold an Islamic Window endorsement from the FSRA.</p>
+</footer>
+
+<script>
+'use strict';
+/* ================= data & formulas =================
+ * All money is integer cents so every list adds up to its total.
+ *   payment gross (¢)  = round(shares × dividend per share × 100)
+ *   withheld (¢)       = round(gross¢ × 30 / 100)          30% US withholding, illustrative
+ *   payment net (¢)    = gross¢ − withheld¢
+ *   month total        = Σ payments whose PAY date falls in that month
+ *   annual income      = Σ payments with pay date in the 12-month window (1 Nov 2026 – 31 Oct 2027)
+ *   dividend yield     = (dividend per share × payments per year) ÷ price
+ *   portfolio yield    = annual gross ÷ Σ position values
+ *   income in AED      = USD × 3.6639 (USD→AED rate)
+ *   funding in AED     = USD × 3.6823 (AED→USD funding rate)
+ *   SCHD add-on        = $X ÷ $28.00 × $1.04/yr; net = gross × 0.70
+ *   trade fee          = max($1, 0.25% × $X)
+ *   coverage           = monthly net (annual net ÷ 12) in AED, spent on bills in order (waterfall)
+ */
+const TODAY = new Date(2026, 10, 19);                 // prototype pinned to 19 Nov 2026
+const WIN_START = new Date(2026, 10, 1), WIN_END = new Date(2027, 9, 31);
+const WHT_PCT = 30, USD_AED = 3.6639, FUND_AED = 3.6823;
+const MONTHS = Array.from({ length: 12 }, (_, i) => new Date(2026, 10 + i, 1));
+const monthly = d => Array.from({ length: 12 }, (_, i) => [i + 1, 1, i + 1, d]);
+
+// [exMonth, exDay, payMonth, payDay], repeated each year; weekends shift to the nearest business day
+const HOLDINGS = [
+  { t: 'MSFT', name: 'Microsoft Corp.', sh: 25, px: 415.00, ret: .121, dps: .91, freq: 'Quarterly', tint: 'var(--invest-tint)', ev: [[2,18,3,11],[5,20,6,10],[8,19,9,9],[11,19,12,10]] },
+  { t: 'AAPL', name: 'Apple Inc.', sh: 40, px: 232.00, ret: .184, dps: .26, freq: 'Quarterly', tint: 'var(--border)', ev: [[2,9,2,12],[5,11,5,14],[8,10,8,13],[11,9,11,12]] },
+  { t: 'KO', name: 'Coca-Cola Co.', sh: 120, px: 70.00, ret: .063, dps: .51, freq: 'Quarterly', tint: 'var(--save-tint)', ev: [[3,13,4,1],[6,11,7,1],[9,15,10,1],[11,27,12,15]] },
+  { t: 'SCHD', name: 'Schwab US Dividend Equity ETF', sh: 200, px: 28.00, ret: .048, dps: .26, freq: 'Quarterly', etf: true, tint: 'var(--sarwa-mint-100)', ev: [[3,24,3,29],[6,23,6,28],[9,22,9,27],[12,9,12,14]] },
+  { t: 'HLAL', name: 'Wahed FTSE USA Shariah ETF', sh: 100, px: 55.00, ret: .097, dps: .20, freq: 'Semi-annual', etf: true, halal: true, tint: 'color-mix(in srgb, var(--trade) 35%, white)', ev: [[6,23,6,26],[12,18,12,23]] },
+  { t: 'JNJ', name: 'Johnson & Johnson', sh: 30, px: 158.00, ret: -.024, dps: 1.30, freq: 'Quarterly', tint: 'var(--save-tint)', ev: [[2,23,3,9],[5,25,6,8],[8,24,9,8],[11,24,12,8]] },
+  { t: 'VNQ', name: 'Vanguard Real Estate ETF', sh: 50, px: 92.00, ret: -.012, dps: .94, freq: 'Quarterly', etf: true, tint: 'var(--invest-tint)', ev: [[3,26,3,31],[6,25,6,30],[9,24,9,29],[12,21,12,24]] },
+  { t: 'O', name: 'Realty Income Corp.', sh: 80, px: 57.00, ret: .031, dps: .269, freq: 'Monthly', tint: 'var(--sarwa-mint-100)', ev: monthly(15) },
+];
+const CASH = 2410.55;
+const BY_T = Object.fromEntries(HOLDINGS.map(h => [h.t, h]));
+HOLDINGS.forEach(h => { h.value = h.sh * h.px; h.annualDps = h.dps * h.ev.length; h.yield = h.annualDps / h.px; });
+
+const bizDay = d => { const w = d.getDay(); if (w === 6) d.setDate(d.getDate() - 1); if (w === 0) d.setDate(d.getDate() + 1); return d; };
+const key = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const fromKey = k => { const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d); };
+const sameDay = (a, b) => key(a) === key(b);
+const monthIdx = d => (d.getFullYear() - 2026) * 12 + d.getMonth() - 10;
+
+const EVENTS = [];
+for (const y of [2026, 2027]) for (const h of HOLDINGS) for (const [em, ed, pm, pd] of h.ev) {
+  const ex = bizDay(new Date(y, em - 1, ed)), pay = bizDay(new Date(y, pm - 1, pd));
+  if (pay < WIN_START || pay > WIN_END) continue;
+  const grossC = Math.round(h.sh * h.dps * 100);
+  const whtC = Math.round(grossC * WHT_PCT / 100);
+  EVENTS.push({ h, ex, pay, grossC, whtC, netC: grossC - whtC });
+}
+EVENTS.sort((a, b) => a.pay - b.pay || a.h.t.localeCompare(b.h.t));
+const BY_PAY = {}, BY_EX = {};
+EVENTS.forEach(e => { (BY_PAY[key(e.pay)] ||= []).push(e); (BY_EX[key(e.ex)] ||= []).push(e); });
+const MONTH_T = MONTHS.map(() => ({ grossC: 0, whtC: 0, netC: 0, ev: [] }));
+EVENTS.forEach(e => { const m = MONTH_T[monthIdx(e.pay)]; m.grossC += e.grossC; m.whtC += e.whtC; m.netC += e.netC; m.ev.push(e); });
+const ANNUAL = MONTH_T.reduce((a, m) => ({ grossC: a.grossC + m.grossC, whtC: a.whtC + m.whtC, netC: a.netC + m.netC }), { grossC: 0, whtC: 0, netC: 0 });
+const POS_VALUE = HOLDINGS.reduce((s, h) => s + h.value, 0);
+const EARNINGS = HOLDINGS.reduce((s, h) => s + h.value * h.ret / (1 + h.ret), 0);  // gain = value × r ÷ (1 + r)
+const COST = POS_VALUE - EARNINGS;
+
+// illustrative UAE monthly costs, AED; paid in order from monthly net income
+const COSTS = [
+  { id: 'netflix', name: 'Netflix', note: 'Standard plan, AED 39 a month', aed: 39, tint: 'var(--save-tint)', ic: 'N' },
+  { id: 'salik', name: 'Your Salik commute', note: '44 gate passes at AED 4', aed: 176, tint: 'color-mix(in srgb, var(--trade) 35%, white)', ic: 'S' },
+  { id: 'dewa', name: 'DEWA bill', note: '1-bed flat, about AED 450 a month', aed: 450, tint: 'var(--invest-tint)', ic: 'D' },
+];
+const KARAK_AED = 2;
+const SCHD = BY_T.SCHD;
+
+/* ================= state ================= */
+const S = {
+  stack: ['trade'], basis: 'net', view: 'cal', calMonth: 0, sel: key(TODAY), bar: 1,
+  holding: 'O', drip: false, alerts: { KO: [{ kind: 'below', price: 65 }] }, add: 0, lang: 'en',
+  sheet: null,
+};
+
+/* ================= format ================= */
+const usd = (c, dp = 2) => (c < 0 ? '−' : '') + '$' + (Math.abs(c) / 100).toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+const usdN = (n, dp = 2) => usd(Math.round(n * 100), dp);
+const aed = (n, dp = 0) => 'AED ' + n.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+const pct = (n, dp = 1) => (n > 0 ? '+' : n < 0 ? '−' : '') + Math.abs(n * 100).toFixed(dp) + '%';
+const dShort = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+const dLong = d => d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+const mLong = d => d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+const mShort = d => d.toLocaleDateString('en-GB', { month: 'short' });
+const amt = e => S.basis === 'net' ? e.netC : e.grossC;
+const basisWord = () => S.basis === 'net' ? 'net' : 'gross';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+const AR = { Home: 'الرئيسية', Trade: 'التداول', Fund: 'التمويل', Rewards: 'المكافآت', Account: 'الحساب', 'Income calendar': 'تقويم الدخل', 'What it covers': 'ما يغطيه دخلك', Back: 'رجوع' };
+const tr = s => S.lang === 'ar' ? (AR[s] || s) : s;
+
+/* ================= icons ================= */
+const I = {
+  home: '<path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1z"/>',
+  trade: '<path d="M3.5 17 9 11.5l4 4 7.5-7.5"/><path d="M15.5 8h5v5"/>',
+  fund: '<circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/>',
+  rewards: '<rect x="3.5" y="9" width="17" height="11.5" rx="1.5"/><path d="M12 9v11.5M3.5 13h17M12 9c-1.5-3.5-5.5-4-5.5-1.5S9.5 9 12 9zm0 0c1.5-3.5 5.5-4 5.5-1.5S14.5 9 12 9z"/>',
+  account: '<circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5c1.4-3.6 4.2-5.5 7.5-5.5s6.1 1.9 7.5 5.5"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>',
+  next: '<path d="M9 5l7 7-7 7"/>',
+  bell: '<path d="M6.5 16v-5a5.5 5.5 0 0 1 11 0v5l1.5 2h-14z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
+  cal: '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.6" fill="currentColor" stroke="none"/>',
+  search: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+  info: '<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/>',
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  close: '<path d="M6 6l12 12M18 6 6 18"/>',
+  star: '<path d="M12 4l2.3 4.8 5.2.7-3.8 3.6.9 5.2L12 15.8l-4.6 2.5.9-5.2-3.8-3.6 5.2-.7z"/>',
+  up: '<path d="M4 16l5-5 3 3 7-7"/>',
+  coin: '<circle cx="12" cy="12" r="8.5"/><path d="M14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.4 0-2.5.8-2.5 2s1.1 1.6 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6.5v1.5M12 16v1.5"/>',
+};
+const ic = (n, s = 24, extra = '') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${I[n]}</svg>`;
+const logo = (h, cls = '') => `<span class="logo ${cls}" style="--tint:${h.tint}" aria-hidden="true">${h.t[0]}</span>`;
+
+/* ================= screens ================= */
+function header(title, right = '') {
+  return `<div class="hdr"><button class="icon-btn" id="back" data-act="back" aria-label="${tr('Back')}">${ic('back', 24, 'class="flip"')}</button>
+    <h1 tabindex="-1">${esc(tr(title))}</h1><div>${right}</div></div>`;
+}
+
+function tabbar() {
+  const tabs = [['Home', 'home'], ['Trade', 'trade'], ['Fund', 'fund'], ['Rewards', 'rewards'], ['Account', 'account']];
+  return `<nav class="tabbar" aria-label="Main">${tabs.map(([l, i]) =>
+    `<button class="tab" data-act="${l === 'Trade' ? 'noop' : 'toast'}" data-msg="${l} isn't part of this concept" ${l === 'Trade' ? 'aria-current="page"' : ''}>${ic(i, 24)}<span>${tr(l)}</span></button>`).join('')}</nav>`;
+}
+
+function renderTrade() {
+  const now = MONTH_T[0], nextM = MONTH_T[1];
+  const nowC = S.basis === 'net' ? now.netC : now.grossC;
+  const nextC = S.basis === 'net' ? nextM.netC : nextM.grossC;
+  const paid = now.ev.filter(e => e.pay <= TODAY).length;
+  const max = Math.max(...MONTH_T.map(m => m.grossC));
+  const spark = MONTH_T.map((m, i) => `<i class="${i === 0 ? 'on' : ''}" style="height:${(S.basis === 'net' ? m.netC : m.grossC) / max * 100}%"></i>`).join('');
+  const sparkL = MONTHS.map(m => `<span>${mShort(m)[0]}</span>`).join('');
+  const rows = HOLDINGS.slice().sort((a, b) => b.value - a.value).map(h => `
+    <button class="li" data-act="holding" data-t="${h.t}" id="pos-${h.t}">
+      ${logo(h)}
+      <span class="mid"><span class="t1">${esc(h.t)}${h.halal ? '<span class="badge">Halal</span>' : ''}</span><span class="t2">${esc(h.name)}</span></span>
+      <span class="end num"><b>${usdN(h.value)}</b><span class="${h.ret >= 0 ? 'pos-t' : 'neg'}">${pct(h.ret)}</span></span>
+    </button>`).join('');
+  return `
+  <div class="top"><span class="wordmark" aria-label="Sarwa">sarwa</span>
+    <button class="icon-btn" data-act="toast" data-msg="Notifications aren't part of this concept" aria-label="Notifications">${ic('bell')}</button></div>
+  <div class="pills" role="group" aria-label="Trade sections">
+    <button class="pill" aria-current="true">Summary</button>
+    <button class="pill" data-act="toast" data-msg="Performance isn't part of this concept">Performance</button>
+    <button class="pill" data-act="toast" data-msg="Watchlists aren't part of this concept">Watchlists</button>
+    <button class="pill" data-act="toast" data-msg="Orders aren't part of this concept">Orders</button>
+  </div>
+  <div class="body">
+    <h1 class="sr" tabindex="-1">Trade summary</h1>
+    <section class="card" aria-label="Trade balance">
+      <div class="label">Balance</div>
+      <div class="big num">${usdN(POS_VALUE + CASH)}</div>
+      <div class="row3 num">
+        <div><span class="label">Earnings</span><b class="pos-t">+${usdN(EARNINGS)}</b></div>
+        <div><span class="label">Returns</span><b class="pos-t">${pct(EARNINGS / COST)}</b></div>
+        <div><span class="label">Cash available</span><b>${usdN(CASH)}</b></div>
+      </div>
+    </section>
+    <button class="card entry" data-act="nav" data-to="calendar" id="entry" aria-label="Passive income: estimated ${usd(nowC)} ${basisWord()} in dividends this month. Open income calendar.">
+      <span class="entry-top">
+        <span class="entry-ic">${ic('cal', 22)}</span>
+        <span style="flex:1;min-width:0">
+          <span class="label" style="display:block">Passive income<span class="chip-new">New</span></span>
+          <h3 class="num">Est. ${usd(nowC)} in dividends this month</h3>
+          <p class="num">${paid === now.ev.length ? (paid === 2 ? 'Both payouts are in.' : 'All paid.') : `${paid} of ${now.ev.length} paid.`} December: est. ${usd(nextC)}, ${S.basis === 'net' ? 'after 30% US withholding' : 'before US withholding'}.</p>
+        </span>
+        <span style="color:var(--text-secondary);margin-top:8px">${ic('next', 20, 'class="flip"')}</span>
+      </span>
+      <span class="spark" aria-hidden="true">${spark}</span>
+      <span class="spark-l" aria-hidden="true">${sparkL}</span>
+    </button>
+    <button class="search" data-act="toast" data-msg="Search isn't part of this concept"><span>Explore stocks and crypto</span>${ic('search', 20)}</button>
+    <div class="themes">
+      <button class="theme" data-act="toast" data-msg="Theme lists already exist in Sarwa">${ic('star', 18)}Most Popular</button>
+      <button class="theme" data-act="toast" data-msg="Theme lists already exist in Sarwa">${ic('up', 18)}Top Movers</button>
+      <button class="theme" data-act="toast" data-msg="The Dividend list already exists in Sarwa">${ic('coin', 18)}Dividend</button>
+    </div>
+    <div class="sec-h"><h2>Your Cash</h2></div>
+    <div class="list"><div class="li"><span class="logo" style="--tint:var(--sarwa-mint-100)" aria-hidden="true">$</span><span class="mid"><span class="t1">USD</span><span class="t2">Cash available to trade</span></span><span class="end num"><b>${usdN(CASH)}</b></span></div></div>
+    <div class="sec-h"><h2>Your Positions</h2><span class="label num">${HOLDINGS.length} holdings</span></div>
+    <div class="list">${rows}</div>
+  </div>
+  ${tabbar()}`;
+}
+
+function basisSeg() {
+  return `<div class="seg" role="group" aria-label="Show income">
+    <button id="b-net" data-act="basis" data-v="net" aria-pressed="${S.basis === 'net'}">Net</button>
+    <button id="b-gross" data-act="basis" data-v="gross" aria-pressed="${S.basis === 'gross'}">Gross</button></div>`;
+}
+
+function renderCalendar() {
+  const a = S.basis === 'net' ? ANNUAL.netC : ANNUAL.grossC;
+  const note = S.basis === 'net'
+    ? `Net shows 30% US withholding, illustrative. The UAE has no US tax treaty that lowers it, so ${usd(ANNUAL.whtC)} a year is held back at source.`
+    : `Gross is before tax. 30% US withholding, illustrative, would take ${usd(ANNUAL.whtC)} of this at source for a UAE resident.`;
+  return `${header('Income calendar', `<button class="icon-btn" data-act="toast" data-msg="Estimates use each holding's last declared dividend and your current shares" aria-label="How estimates work">${ic('info', 22)}</button>`)}
+  <div class="body">
+    <section class="card hero" aria-label="Income summary">
+      <div class="hero-top"><span class="label">Est. income, next 12 months</span>${basisSeg()}</div>
+      <div class="amt num" aria-live="polite">${usd(a)}</div>
+      <div class="sub num">≈ ${usd(Math.round(a / 12))} a month · ${(ANNUAL.grossC / 100 / POS_VALUE * 100).toFixed(2)}% yield on your positions</div>
+      <div class="taxnote">${ic('info', 16)}<span>${note}</span></div>
+    </section>
+    <div class="seg full" role="group" aria-label="View" style="margin:4px 0 12px">
+      <button id="v-cal" data-act="view" data-v="cal" aria-pressed="${S.view === 'cal'}">Calendar</button>
+      <button id="v-year" data-act="view" data-v="year" aria-pressed="${S.view === 'year'}">12 months</button>
+    </div>
+    ${S.view === 'cal' ? calView() : yearView()}
+    ${teaser()}
+    <div class="disc">
+      <p>Dividends are not guaranteed. Companies can cut, delay or cancel them, and dates shown before a company declares are estimates from its past pattern.</p>
+      <p>All investing involves risk, including the possible loss of money you invest. Past performance is no guarantee of future results.</p>
+    </div>
+  </div>`;
+}
+
+function calView() {
+  const m = MONTHS[S.calMonth], y = m.getFullYear(), mo = m.getMonth();
+  const lead = (new Date(y, mo, 1).getDay() + 6) % 7, days = new Date(y, mo + 1, 0).getDate();
+  const mt = MONTH_T[S.calMonth];
+  let cells = '';
+  for (let i = 0; i < lead; i++) cells += '<span aria-hidden="true"></span>';
+  for (let d = 1; d <= days; d++) {
+    const dt = new Date(y, mo, d), k = key(dt), pays = BY_PAY[k] || [], exs = BY_EX[k] || [];
+    const payC = pays.reduce((s, e) => s + amt(e), 0);
+    const parts = [];
+    if (pays.length) parts.push(`${pays.map(e => e.h.t).join(', ')} ${dt < TODAY ? 'paid' : 'pays'} ${usd(payC)} ${basisWord()}`);
+    if (exs.length) parts.push(`${exs.map(e => e.h.t).join(', ')} ex-dividend`);
+    const label = `${dLong(dt)}${sameDay(dt, TODAY) ? ', today' : ''}${parts.length ? ': ' + parts.join('; ') : ''}`;
+    cells += `<button class="day${dt < TODAY && !sameDay(dt, TODAY) ? ' past' : ''}${sameDay(dt, TODAY) ? ' today' : ''}" id="d-${k}" data-act="day" data-k="${k}"
+      aria-pressed="${S.sel === k}" tabindex="${S.sel === k ? 0 : -1}" aria-label="${esc(label)}">
+      <span class="n">${d}</span>${pays.length ? `<span class="pa">${payC < 100 ? '<$1' : usd(payC, 0)}</span>` : ''}
+      ${exs.length ? `<span class="xr">${exs.slice(0, 3).map(() => '<i></i>').join('')}</span>` : ''}</button>`;
+  }
+  return `<section class="card" aria-label="Calendar">
+    <div class="monthbar">
+      <button class="icon-btn" id="m-prev" data-act="month" data-d="-1" aria-label="Previous month" ${S.calMonth === 0 ? 'disabled' : ''}>${ic('back', 22, 'class="flip"')}</button>
+      <div class="mt"><h2>${mLong(m)}</h2><span class="num">Est. ${usd(S.basis === 'net' ? mt.netC : mt.grossC)} ${basisWord()} · ${mt.ev.length} payout${mt.ev.length === 1 ? '' : 's'}</span></div>
+      <button class="icon-btn" id="m-next" data-act="month" data-d="1" aria-label="Next month" ${S.calMonth === 11 ? 'disabled' : ''}>${ic('next', 22, 'class="flip"')}</button>
+    </div>
+    <div class="dows" aria-hidden="true">${['M', 'T', 'W', 'T', 'F', 'S', 'S'].map(x => `<span>${x}</span>`).join('')}</div>
+    <div class="grid" role="group" aria-label="Days in ${mLong(m)}. Use arrow keys to move." id="grid">${cells}</div>
+    <div class="legend"><span><span class="pa">$12</span>Pay date, est. ${basisWord()}</span><span><span class="ring"></span>Ex-dividend date</span></div>
+  </section>
+  <div id="daypanel" aria-live="polite">${dayPanel()}</div>`;
+}
+
+function dayPanel() {
+  const d = fromKey(S.sel), k = S.sel;
+  const pays = BY_PAY[k] || [], exs = BY_EX[k] || [];
+  const chip = sameDay(d, TODAY) ? '<span class="badge">Today</span>' : d < TODAY ? '<span class="badge grey">Past</span>' : '';
+  let html = `<div class="dp-h"><h3>${dLong(d)}</h3>${chip}</div>`;
+  if (!pays.length && !exs.length) {
+    const nxt = EVENTS.flatMap(e => [{ e, d: e.ex, kind: 'ex' }, { e, d: e.pay, kind: 'pay' }]).filter(x => x.d > d).sort((a, b) => a.d - b.d)[0];
+    return html + `<div class="list"><div class="empty">Nothing pays or goes ex-dividend on this day.${nxt ? ` Next: <b>${nxt.e.h.t}</b> ${nxt.kind === 'ex' ? 'goes ex-dividend' : 'pays'} on <b>${dShort(nxt.d)}</b>.` : ''}</div></div>`;
+  }
+  const rows = [
+    ...pays.map(e => `<button class="li" data-act="holding" data-t="${e.h.t}" id="dp-p-${e.h.t}">${logo(e.h, 'sm')}
+      <span class="mid"><span class="t1">${e.h.t} <span class="kind"><span class="fill"></span>${e.pay < TODAY ? 'Paid' : 'Pays'}</span></span>
+      <span class="t2 num">${e.h.sh} shares × $${e.h.dps.toFixed(e.h.dps * 100 % 1 ? 3 : 2)} · went ex ${dShort(e.ex)}</span></span>
+      <span class="end num"><b class="pos-t">${usd(amt(e))}</b><span class="label">${S.basis === 'net' ? `${usd(e.grossC)} gross` : `${usd(e.netC)} net`}</span></span></button>`),
+    ...exs.map(e => `<button class="li" data-act="holding" data-t="${e.h.t}" id="dp-x-${e.h.t}">${logo(e.h, 'sm')}
+      <span class="mid"><span class="t1">${e.h.t} <span class="kind"><span class="ring"></span>Ex-dividend</span></span>
+      <span class="t2">Hold it before this date to get the ${dShort(e.pay)} payout</span></span>
+      <span class="end num"><b>${usd(amt(e))}</b><span class="label">on ${dShort(e.pay)}</span></span></button>`),
+  ];
+  return html + `<div class="list">${rows.join('')}</div>`;
+}
+
+function yearView() {
+  const max = Math.max(...MONTH_T.map(m => m.grossC));
+  const avgC = (S.basis === 'net' ? ANNUAL.netC : ANNUAL.grossC) / 12;
+  const bars = MONTH_T.map((m, i) => {
+    const v = S.basis === 'net' ? m.netC : m.grossC;
+    return `<button class="bar${i < 2 ? ' l' : i > 9 ? ' r' : ''}" id="bar-${i}" data-act="bar" data-i="${i}" aria-pressed="${S.bar === i}"
+      aria-label="${mLong(MONTHS[i])}: est. ${usd(v)} ${basisWord()}" tabindex="${S.bar === i ? 0 : -1}">
+      <span class="col"><span class="tip num">${usd(v, 0)}</span>${S.basis === 'gross' ? `<span class="w" style="height:${m.whtC / max * 100}%"></span>` : ''}<span class="nt" style="height:${m.netC / max * 100}%"></span></span>
+<span class="lbl">${mShort(MONTHS[i])[0]}</span></button>`;
+  }).join('');
+  // bars area: 190px − 26px top padding − 22px labels = 142px of plot height
+  const avgBottom = 22 + 142 * (avgC / max);
+  return `<section class="card" aria-label="12-month income chart">
+    <div class="sec-h" style="margin-top:0"><h2>Next 12 months</h2><span class="label">Tap or drag across bars</span></div>
+    <div class="bars" id="bars" role="group" aria-label="Monthly estimated income. Use arrow keys to move.">${bars}
+      <span class="avg" style="bottom:${avgBottom}px" aria-hidden="true"></span></div>
+    <div class="yr-legend num"><span><i style="background:var(--sarwa-green-500)"></i>Net income</span>${S.basis === 'gross' ? '<span><i style="background:var(--sarwa-mint-100)"></i>US withholding (30%)</span>' : ''}<span><i class="dash"></i>Average ${usd(Math.round(avgC), 0)}/mo</span></div>
+  </section>
+  <div id="bardetail" aria-live="polite">${barDetail()}</div>`;
+}
+
+function barDetail() {
+  const m = MONTH_T[S.bar];
+  const rows = m.ev.map(e => `<button class="li" data-act="holding" data-t="${e.h.t}" id="bd-${e.h.t}-${key(e.pay)}">${logo(e.h, 'sm')}
+    <span class="mid"><span class="t1">${e.h.t}</span><span class="t2">Pays ${dShort(e.pay)} · ex ${dShort(e.ex)}</span></span>
+    <span class="end num"><b>${usd(amt(e))}</b></span></button>`).join('');
+  return `<div class="dp-h"><h3>${mLong(MONTHS[S.bar])}</h3><span class="label num">Est. ${usd(S.basis === 'net' ? m.netC : m.grossC)} ${basisWord()}</span></div>
+    <div class="list">${rows}</div>
+    <button class="btn ghost" data-act="opencal" id="opencal" style="margin-top:4px">See ${mShort(MONTHS[S.bar])} in the calendar ${ic('next', 16, 'class="flip"')}</button>`;
+}
+
+function coverage(monthlyAED) {
+  let left = monthlyAED;
+  return COSTS.map(c => { const f = Math.max(0, Math.min(1, left / c.aed)); left -= f * c.aed; return { ...c, f, left }; });
+}
+function coverSentence(cov, monthlyAED) {
+  const full = cov.filter(c => c.f >= 1), part = cov.find(c => c.f < 1 && c.f > 0);
+  const names = full.map(c => c.id === 'salik' ? 'your Salik commute' : c.id === 'dewa' ? 'your DEWA bill' : c.name);
+  if (!full.length) return `Your income covers ${Math.floor(cov[0].f * 100)}% of Netflix.`;
+  const list = names.length > 1 ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] : names[0];
+  if (!part) return full.length === COSTS.length ? `Your income covers ${list}, with ${aed(cov[cov.length - 1].left)} to spare.` : `Your income covers ${list}.`;
+  return `Your income covers ${list}, plus ${Math.floor(part.f * 100)}% of ${part.id === 'dewa' ? 'your DEWA bill' : part.name}.`;
+}
+
+function teaser() {
+  const mAED = ANNUAL.netC / 100 / 12 * USD_AED;
+  return `<button class="teaser" data-act="nav" data-to="covers" id="teaser">
+    <span class="mid"><h3>${esc(coverSentence(coverage(mAED), mAED))}</h3><p class="num">≈ ${aed(mAED)} a month, net. See what more would cover.</p></span>
+    ${ic('next', 20, 'class="flip"')}</button>`;
+}
+
+function nextEvents(h) {
+  const ev = EVENTS.filter(e => e.h === h);
+  return { nextEx: ev.find(e => e.ex >= TODAY), nextPay: ev.find(e => e.pay >= TODAY), upcoming: ev.filter(e => e.pay >= TODAY).slice(0, 4), annual: ev };
+}
+
+function renderHolding() {
+  const h = BY_T[S.holding], { nextEx, nextPay, upcoming, annual } = nextEvents(h);
+  const annG = annual.reduce((s, e) => s + e.grossC, 0), annN = annual.reduce((s, e) => s + e.netC, 0);
+  const alerts = S.alerts[h.t] || [];
+  const exLabel = nextEx ? (sameDay(nextEx.ex, TODAY) ? 'Today' : dShort(nextEx.ex) + ' ' + nextEx.ex.getFullYear()) : '—';
+  const dripBuys = nextPay ? nextPay.netC / 100 / h.px : 0;
+  return `${header(h.t)}
+  <div class="body">
+    <div class="h-head">${logo(h)}<div><h2>${esc(h.name)}</h2>
+      <div class="t2 num">${usdN(h.px)} · ${h.sh} shares · ${usdN(h.value)}${h.halal ? ' <span class="badge">Halal</span>' : ''}${h.freq === 'Monthly' ? ' <span class="badge">Monthly payer</span>' : ''}</div></div></div>
+    <section class="card" aria-labelledby="dv-h">
+      <div class="sec-h" style="margin-top:0"><h2 id="dv-h">Dividends</h2>${basisSeg()}</div>
+      <div class="kv num">
+        <div><span class="label">Dividend yield</span><b>${(h.yield * 100).toFixed(2)}%</b></div>
+        <div><span class="label">Frequency</span><b>${h.freq}</b></div>
+        <div><span class="label">Next ex-date</span><b>${exLabel}</b></div>
+        <div><span class="label">Next pay date</span><b>${nextPay ? dShort(nextPay.pay) + ' ' + nextPay.pay.getFullYear() : '—'}</b></div>
+        <div><span class="label">Per share</span><b>$${h.dps.toFixed(h.dps * 100 % 1 ? 3 : 2)}</b></div>
+        <div><span class="label">Your est. annual income</span><b class="pos-t">${usd(S.basis === 'net' ? annN : annG)}</b></div>
+      </div>
+      ${nextEx && sameDay(nextEx.ex, TODAY) ? `<div class="taxnote">${ic('info', 16)}<span>${h.t} goes ex-dividend today. Shares you already held get the ${dShort(nextEx.pay)} payout; shares bought today don't.</span></div>` : ''}
+      <div class="upcoming" aria-label="Upcoming payouts">${upcoming.map(e => `<div class="up num"><span class="label">${dShort(e.pay)}</span><b>${usd(amt(e))}</b></div>`).join('')}</div>
+    </section>
+    <section class="card">
+      <div class="switch-row">
+        <div class="mid"><h3 id="drip-l">Reinvest dividends</h3>
+          <p>Each payout buys more of the holding that paid it.</p>
+          <span class="linked">${ic('link', 14)}Linked to Account › Dividend reinvesting</span></div>
+        <button class="sw" role="switch" id="drip" data-act="drip" aria-checked="${S.drip}" aria-labelledby="drip-l"></button>
+      </div>
+      <div class="drip-note num">${S.drip
+        ? `On for all Trade positions. Your next ${h.t} payout of ${usd(nextPay ? nextPay.netC : 0)} net would buy about ${dripBuys.toFixed(4)} shares at today's price.`
+        : `Off. Payouts land in Cash available. Turning this on applies to all your Trade positions.`}</div>
+    </section>
+    <section class="card" aria-labelledby="al-h">
+      <div class="sec-h" style="margin-top:0"><h2 id="al-h">Price alerts</h2><span class="label num">${alerts.length} active</span></div>
+      ${alerts.length ? alerts.map((a, i) => `<div class="alert-li num">${ic('bell', 18)}<span class="mid">${alertText(h, a)}${a.push === false ? ' <span class="label">· in-app only</span>' : ''}</span>
+        <button class="icon-btn" id="rm-${i}" data-act="alert-rm" data-i="${i}" aria-label="Remove alert: ${esc(alertText(h, a))}">${ic('close', 18)}</button></div>`).join('')
+        : `<p class="label" style="margin:0 0 4px">No alerts yet. Market Alerts still tell you about big moves; this one fires at your price.</p>`}
+      <button class="btn secondary block" id="open-alert" data-act="alert-open" style="margin-top:12px">${ic('bell', 20)}Set a price-target alert</button>
+    </section>
+    <div class="disc"><p>Yield uses the last declared dividend × payments a year ÷ today's price. Dividends are not guaranteed. All investing involves risk, including the possible loss of money you invest.</p></div>
+  </div>`;
+}
+function alertText(h, a) {
+  if (a.kind === 'move') return `${h.t} moves ${a.dir === 'up' ? 'up' : a.dir === 'down' ? 'down' : ''} ${a.pct}% from ${usdN(a.ref)}`.replace('  ', ' ');
+  return `${h.t} ${a.kind === 'above' ? 'rises above' : 'falls below'} ${usdN(a.price)}`;
+}
+
+function renderCovers() {
+  return `${header('What it covers')}
+  <div class="body">
+    <div id="cov-hero">${coversHero()}</div>
+    <section class="card" aria-labelledby="sl-h">
+      <label for="add" id="sl-h" class="label" style="display:block">If you added this to SCHD</label>
+      <div class="slider-wrap">
+        <div class="val num" id="add-val">${usdN(S.add, 0)}</div>
+        <input type="range" id="add" min="0" max="60000" step="500" value="${S.add}" style="--p:${S.add / 600}%" aria-valuetext="${usdN(S.add, 0)}">
+        <div class="ticks num" aria-hidden="true"><span>$0</span><span>$30k</span><span>$60k</span></div>
+      </div>
+      <div class="quick">
+        <button data-act="add-set" data-v="5000" id="q5">$5,000</button>
+        <button data-act="add-set" data-v="20000" id="q20">$20,000</button>
+        <button data-act="add-set" data-v="need" id="qneed">Cover all three</button>
+      </div>
+      <div id="add-out">${addOut()}</div>
+    </section>
+    <div id="cov-list">${coversList()}</div>
+    <div class="disc">
+      <p>Projections use SCHD's last declared dividend ($0.26 a quarter, ${(SCHD.yield * 100).toFixed(2)}% yield at $28.00) and your current holdings, after 30% US withholding, illustrative. Bill amounts are illustrative. Dividends are not guaranteed.</p>
+      <p>All investing involves risk, including the possible loss of money you invest. Past performance is no guarantee of future results.</p>
+    </div>
+  </div>
+  <div class="cta"><button class="btn primary block" id="buy" data-act="buy" ${S.add ? '' : 'disabled'}>${S.add ? `Buy ${usdN(S.add, 0)} of SCHD` : 'Move the slider to try an amount'}</button></div>`;
+}
+
+function proj() {
+  const addSh = S.add / SCHD.px;
+  const addGross = addSh * SCHD.annualDps, addNet = addGross * (100 - WHT_PCT) / 100;
+  const baseNet = ANNUAL.netC / 100, totalNet = baseNet + addNet;
+  return { addSh, addGross, addNet, baseNet, totalNet, monthlyAED: totalNet / 12 * USD_AED };
+}
+function coversHero() {
+  const p = proj(), cov = coverage(p.monthlyAED);
+  return `<section class="cov-hero">
+      <div class="label">Your est. net income, per month</div>
+      <div class="amt num">${aed(p.monthlyAED)}</div>
+      <div class="sub num">${usdN(p.totalNet / 12)} a month after 30% US withholding, illustrative</div>
+      <h2>${esc(coverSentence(cov, p.monthlyAED))}</h2>
+      <div class="sub num" style="margin-top:4px">Or ${Math.floor(p.monthlyAED / KARAK_AED)} cups of karak at AED ${KARAK_AED}.</div>
+    </section>`;
+}
+function coversList() {
+  const cov = coverage(proj().monthlyAED);
+  return `<section class="card" aria-label="Monthly costs covered">
+      ${cov.map(c => `<div class="cost">
+        <div class="cost-top"><span class="cost-ic" style="background:${c.tint}" aria-hidden="true">${c.ic}</span>
+          <span class="mid"><b>${c.name}</b><span class="label">${c.note}</span></span>
+          <span class="end num ${c.f >= 1 ? 'pos-t' : ''}">${c.f >= 1 ? 'Covered' : Math.floor(c.f * 100) + '%'}<br><span class="label" style="font-weight:400">${aed(c.aed)}</span></span></div>
+        <div class="meter" role="img" aria-label="${c.name}: ${Math.floor(c.f * 100)}% covered"><i class="${c.f >= 1 ? 'full' : ''}" style="width:${c.f * 100}%"></i></div></div>`).join('')}
+    </section>`;
+}
+function addOut() {
+  const p = proj(), fee = S.add ? Math.max(1, S.add * 0.0025) : 0;
+  return `<div class="proj num">
+      <div><span class="label">Annual income, net</span><b>${usdN(p.totalNet)}</b><span class="delta pos-t">${p.addNet ? '+' + usdN(p.addNet) : 'today'}</span></div>
+      <div><span class="label">Annual income, gross</span><b>${usdN(ANNUAL.grossC / 100 + p.addGross)}</b><span class="delta pos-t">${p.addGross ? '+' + usdN(p.addGross) : 'today'}</span></div>
+    </div>
+    <div class="fund-line num">${S.add
+      ? `You'd send ${aed(S.add * FUND_AED, 2)} at AED 3.6823 per $1, for about ${p.addSh.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} SCHD shares. Trade fee ${usdN(fee)} (the greater of $1 or 0.25%).`
+      : `Each $1,000 in SCHD adds about ${usdN(1000 / SCHD.px * SCHD.annualDps * 0.7)} a year, net.`}</div>`;
+}
+function needForAll() {
+  const need = COSTS.reduce((s, c) => s + c.aed, 0) / USD_AED * 12;        // annual net USD needed
+  const perDollar = SCHD.annualDps / SCHD.px * (100 - WHT_PCT) / 100;      // net income per $ in SCHD
+  return Math.min(60000, Math.ceil(Math.max(0, need - ANNUAL.netC / 100) / perDollar / 500) * 500);
+}
+
+/* ================= alert sheet ================= */
+function openAlert(trigger) {
+  const h = BY_T[S.holding];
+  S.sheet = { mode: 'price', kind: 'above', price: (Math.ceil(h.px * 1.05)).toFixed(2), pct: '5', dir: 'either', push: true, trigger };
+  renderSheet(true);
+}
+function sheetHTML() {
+  const h = BY_T[S.holding], s = S.sheet;
+  let body, err = '', help = '';
+  if (s.mode === 'price') {
+    const v = parseFloat(s.price);
+    if (!(v > 0)) err = 'Enter a price above $0.';
+    else if (s.kind === 'above' && v <= h.px) err = `Pick a price above today's ${usdN(h.px)}, or switch to "Falls below".`;
+    else if (s.kind === 'below' && v >= h.px) err = `Pick a price below today's ${usdN(h.px)}, or switch to "Rises above".`;
+    else help = `That's ${pct((v - h.px) / h.px)} from today's ${usdN(h.px)}.`;
+    body = `<div class="seg full" role="group" aria-label="Direction">
+        <button id="k-above" data-act="alert-kind" data-v="above" aria-pressed="${s.kind === 'above'}">Rises above</button>
+        <button id="k-below" data-act="alert-kind" data-v="below" aria-pressed="${s.kind === 'below'}">Falls below</button></div>
+      <div class="field">
+        <button class="step" id="st-m" data-act="alert-step" data-d="-1" aria-label="Lower target price">−</button>
+        <label class="box num ${err ? 'err' : ''}"><span aria-hidden="true">$</span><span class="sr">Target price in US dollars</span>
+          <input id="al-price" inputmode="decimal" autocomplete="off" value="${esc(s.price)}" aria-describedby="al-help" aria-invalid="${!!err}"></label>
+        <button class="step" id="st-p" data-act="alert-step" data-d="1" aria-label="Raise target price">+</button>
+      </div>`;
+  } else {
+    const p = parseFloat(s.pct);
+    if (!(p > 0 && p < 100)) err = 'Enter a move between 0.1% and 99%.';
+    else {
+      const up = h.px * (1 + p / 100), dn = h.px * (1 - p / 100);
+      help = s.dir === 'up' ? `Fires at ${usdN(up)}.` : s.dir === 'down' ? `Fires at ${usdN(dn)}.` : `Fires at ${usdN(up)} or ${usdN(dn)}.`;
+    }
+    body = `<div class="seg full" role="group" aria-label="Direction">
+        <button id="dr-either" data-act="alert-dir" data-v="either" aria-pressed="${s.dir === 'either'}">Either way</button>
+        <button id="dr-up" data-act="alert-dir" data-v="up" aria-pressed="${s.dir === 'up'}">Up</button>
+        <button id="dr-down" data-act="alert-dir" data-v="down" aria-pressed="${s.dir === 'down'}">Down</button></div>
+      <div class="field"><label class="box num ${err ? 'err' : ''}"><span class="sr">Percentage move</span>
+        <input id="al-pct" inputmode="decimal" autocomplete="off" value="${esc(s.pct)}" aria-describedby="al-help" aria-invalid="${!!err}"><span aria-hidden="true">%</span></label></div>
+      <div class="quick">${[3, 5, 10].map(x => `<button id="pc-${x}" data-act="alert-pct" data-v="${x}">${x}%</button>`).join('')}</div>`;
+  }
+  return `<div class="scrim" data-act="sheet-close"></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-h">
+    <div class="grab" aria-hidden="true"></div>
+    <div class="sheet-h"><h2 id="sh-h">Price alert · ${h.t}</h2><button class="icon-btn" id="sh-x" data-act="sheet-close" aria-label="Close">${ic('close', 22)}</button></div>
+    <p class="label num">${esc(h.name)} is at ${usdN(h.px)} today</p>
+    <div class="seg full" role="group" aria-label="Alert type" style="margin-bottom:14px">
+      <button id="md-price" data-act="alert-mode" data-v="price" aria-pressed="${s.mode === 'price'}">Price target</button>
+      <button id="md-move" data-act="alert-mode" data-v="move" aria-pressed="${s.mode === 'move'}">% move</button></div>
+    ${body}
+    <div class="help num ${err ? 'err' : ''}" id="al-help" aria-live="polite">${err || help}</div>
+    <div class="switch-row"><div class="mid"><h3 id="push-l">Push notification</h3><p>${s.push ? 'We\'ll ping your phone once, then switch the alert off.' : 'Off: you\'ll only see it in Notifications.'}</p></div>
+      <button class="sw" role="switch" id="push" data-act="alert-push" aria-checked="${s.push}" aria-labelledby="push-l"></button></div>
+    <button class="btn primary block" id="al-save" data-act="alert-save" ${err ? 'disabled' : ''}>Set alert</button>
+  </div>`;
+}
+function renderSheet(opening) {
+  const layer = document.getElementById('sheetLayer');
+  const fid = document.activeElement && layer.contains(document.activeElement) ? document.activeElement.id : null;
+  const caret = document.activeElement && document.activeElement.tagName === 'INPUT' ? document.activeElement.selectionStart : null;
+  layer.innerHTML = sheetHTML();
+  if (opening) { requestAnimationFrame(() => requestAnimationFrame(() => { layer.classList.add('sheet-open'); document.getElementById('al-price')?.focus({ preventScroll: true }); })); }
+  else { layer.classList.add('sheet-open'); if (fid) { const el = document.getElementById(fid); if (el) { el.focus({ preventScroll: true }); if (caret != null && el.setSelectionRange) el.setSelectionRange(caret, caret); } } }
+  setChip();
+}
+function closeSheet() {
+  const layer = document.getElementById('sheetLayer'), trig = S.sheet && S.sheet.trigger;
+  layer.classList.remove('sheet-open'); S.sheet = null;
+  setTimeout(() => { if (!S.sheet) layer.innerHTML = ''; }, 250);
+  (document.getElementById(trig) || document.getElementById('open-alert'))?.focus({ preventScroll: true });
+  setChip();
+}
+// update help/error text without re-rendering the input being typed in
+function sheetValidate() { const keep = document.activeElement?.id; renderSheet(false); if (keep) document.getElementById(keep)?.focus(); }
+
+/* ================= router ================= */
+const SCREENS = { trade: renderTrade, calendar: renderCalendar, holding: renderHolding, covers: renderCovers };
+const stackEl = document.getElementById('stack');
+const cur = () => S.stack[S.stack.length - 1];
+function mount(dir, focus) {
+  const node = document.createElement('div');
+  node.className = 'scr'; node.dataset.screen = cur(); node.innerHTML = SCREENS[cur()]();
+  const old = stackEl.querySelector('.scr:not(.leave):not(.leave-back)');
+  if (old && dir) {
+    node.classList.add(dir === 'fwd' ? 'enter' : 'enter-back');
+    stackEl.appendChild(node);
+    node.getBoundingClientRect();
+    node.classList.remove('enter', 'enter-back');
+    old.classList.add(dir === 'fwd' ? 'leave' : 'leave-back');
+    setTimeout(() => old.remove(), 240);
+  } else { stackEl.innerHTML = ''; stackEl.appendChild(node); }
+  if (focus) node.querySelector('h1')?.focus({ preventScroll: true });
+  setChip();
+}
+function refresh() {
+  const node = stackEl.querySelector('.scr:not(.leave):not(.leave-back)'); if (!node) return;
+  const body = node.querySelector('.body'), st = body ? body.scrollTop : 0;
+  const fid = node.contains(document.activeElement) ? document.activeElement.id : null;
+  node.innerHTML = SCREENS[cur()]();
+  const nb = node.querySelector('.body'); if (nb) nb.scrollTop = st;
+  if (fid) document.getElementById(fid)?.focus({ preventScroll: true });
+  setChip();
+}
+function go(to, focus = true) { S.stack.push(to); mount('fwd', focus); }
+function back() { if (S.stack.length > 1) { S.stack.pop(); mount('back', true); } }
+function setChip() {
+  const c = S.sheet ? 'alert' : cur() === 'calendar' ? (S.view === 'year' ? 'year' : 'calendar') : cur();
+  document.querySelectorAll('[data-chip]').forEach(b => b.setAttribute('aria-current', String(b.dataset.chip === c)));
+}
+function jump(chip) {
+  if (S.sheet) { S.sheet = null; const l = document.getElementById('sheetLayer'); l.classList.remove('sheet-open'); l.innerHTML = ''; }
+  const map = { trade: ['trade'], calendar: ['trade', 'calendar'], year: ['trade', 'calendar'], holding: ['trade', 'calendar', 'holding'], alert: ['trade', 'calendar', 'holding'], covers: ['trade', 'calendar', 'covers'] };
+  if (chip === 'calendar') S.view = 'cal';
+  if (chip === 'year') S.view = 'year';
+  S.stack = map[chip].slice(); mount(null, false);
+  if (chip === 'alert') openAlert('open-alert');
+}
+
+let toastT;
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200); }
+
+function selectDay(k, focus) {
+  S.sel = k;
+  const mi = monthIdx(fromKey(k));
+  if (mi !== S.calMonth) { S.calMonth = mi; refresh(); }
+  else {
+    document.querySelectorAll('.day').forEach(b => { const on = b.dataset.k === k; b.setAttribute('aria-pressed', on); b.tabIndex = on ? 0 : -1; });
+    document.getElementById('daypanel').innerHTML = dayPanel();
+  }
+  if (focus) document.getElementById('d-' + k)?.focus({ preventScroll: false });
+}
+function selectBar(i, focus) {
+  if (i < 0 || i > 11 || i === S.bar && !focus) return;
+  S.bar = i;
+  document.querySelectorAll('.bar').forEach(b => { const on = +b.dataset.i === i; b.setAttribute('aria-pressed', on); b.tabIndex = on ? 0 : -1; });
+  document.getElementById('bardetail').innerHTML = barDetail();
+  if (focus) document.getElementById('bar-' + i)?.focus();
+}
+
+/* ================= events ================= */
+const app = document.getElementById('app');
+app.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]'); if (!el || el.disabled) return;
+  const a = el.dataset.act;
+  switch (a) {
+    case 'nav': go(el.dataset.to); break;
+    case 'back': back(); break;
+    case 'holding': S.holding = el.dataset.t; go('holding'); break;
+    case 'basis': S.basis = el.dataset.v; refresh(); break;
+    case 'view': S.view = el.dataset.v; refresh(); break;
+    case 'month': {
+      S.calMonth = Math.max(0, Math.min(11, S.calMonth + +el.dataset.d));
+      const first = MONTH_T[S.calMonth].ev[0];
+      S.sel = S.calMonth === 0 ? key(TODAY) : key(first ? first.pay : MONTHS[S.calMonth]);
+      refresh();
+      if (!document.getElementById(el.id) || document.getElementById(el.id).disabled) document.getElementById('d-' + S.sel)?.focus();
+      break;
+    }
+    case 'day': selectDay(el.dataset.k, false); break;
+    case 'bar': selectBar(+el.dataset.i, false); break;
+    case 'opencal': {
+      S.calMonth = S.bar; S.view = 'cal';
+      const first = MONTH_T[S.bar].ev[0]; S.sel = first ? key(first.pay) : key(MONTHS[S.bar]);
+      refresh(); document.getElementById('d-' + S.sel)?.focus(); break;
+    }
+    case 'drip': S.drip = !S.drip; refresh(); toast(S.drip ? 'Dividend reinvesting is on for all Trade positions' : 'Dividend reinvesting is off'); break;
+    case 'alert-open': openAlert(el.id); break;
+    case 'alert-rm': { const t = S.holding; const [r] = S.alerts[t].splice(+el.dataset.i, 1); refresh(); document.getElementById('open-alert')?.focus(); toast('Removed: ' + alertText(BY_T[t], r)); break; }
+    case 'sheet-close': closeSheet(); break;
+    case 'alert-mode': S.sheet.mode = el.dataset.v; renderSheet(false); break;
+    case 'alert-kind': {
+      const h = BY_T[S.holding]; S.sheet.kind = el.dataset.v;
+      S.sheet.price = (el.dataset.v === 'above' ? Math.ceil(h.px * 1.05) : Math.floor(h.px * 0.95)).toFixed(2);
+      renderSheet(false); break;
+    }
+    case 'alert-step': {
+      const h = BY_T[S.holding], step = h.px >= 100 ? 1 : 0.5;
+      const v = (parseFloat(S.sheet.price) || h.px) + step * +el.dataset.d;
+      S.sheet.price = Math.max(step, v).toFixed(2); renderSheet(false); break;
+    }
+    case 'alert-dir': S.sheet.dir = el.dataset.v; renderSheet(false); break;
+    case 'alert-pct': S.sheet.pct = el.dataset.v; renderSheet(false); break;
+    case 'alert-push': S.sheet.push = !S.sheet.push; renderSheet(false); break;
+    case 'alert-save': {
+      const h = BY_T[S.holding], s = S.sheet;
+      const al = s.mode === 'price' ? { kind: s.kind, price: parseFloat(s.price), push: s.push } : { kind: 'move', pct: parseFloat(s.pct), dir: s.dir, ref: h.px, push: s.push };
+      (S.alerts[h.t] ||= []).push(al);
+      closeSheet(); refresh(); document.getElementById('open-alert')?.focus();
+      toast(`Alert set: ${alertText(h, al)}`); break;
+    }
+    case 'add-set': S.add = el.dataset.v === 'need' ? needForAll() : +el.dataset.v; syncAdd(true); break;
+    case 'buy': toast(`Prototype: this would open the SCHD order ticket for ${usdN(S.add, 0)}`); break;
+    case 'toast': toast(el.dataset.msg); break;
+  }
+});
+function syncAdd(setInput) {
+  const r = document.getElementById('add'); if (!r) return;
+  if (setInput) r.value = S.add;
+  r.style.setProperty('--p', (S.add / 600) + '%');
+  r.setAttribute('aria-valuetext', usdN(S.add, 0));
+  document.getElementById('add-val').textContent = usdN(S.add, 0);
+  document.getElementById('cov-hero').innerHTML = coversHero();
+  document.getElementById('cov-list').innerHTML = coversList();
+  document.getElementById('add-out').innerHTML = addOut();
+  const b = document.getElementById('buy');
+  b.disabled = !S.add; b.textContent = S.add ? `Buy ${usdN(S.add, 0)} of SCHD` : 'Move the slider to try an amount';
+}
+let raf;
+app.addEventListener('input', e => {
+  if (e.target.id === 'add') { S.add = +e.target.value; cancelAnimationFrame(raf); raf = requestAnimationFrame(() => syncAdd(false)); }
+  if (e.target.id === 'al-price') { S.sheet.price = e.target.value.replace(/[^0-9.]/g, ''); sheetValidate(); }
+  if (e.target.id === 'al-pct') { S.sheet.pct = e.target.value.replace(/[^0-9.]/g, ''); sheetValidate(); }
+});
+app.addEventListener('keydown', e => {
+  const rtl = app.dir === 'rtl';
+  const day = e.target.closest && e.target.closest('.day');
+  if (day) {
+    const d = fromKey(day.dataset.k), m = { ArrowLeft: rtl ? 1 : -1, ArrowRight: rtl ? -1 : 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
+    if (m) {
+      e.preventDefault();
+      const n = new Date(d); n.setDate(d.getDate() + m);
+      if (n >= WIN_START && n <= WIN_END) selectDay(key(n), true);
+    }
+    return;
+  }
+  const bar = e.target.closest && e.target.closest('.bar');
+  if (bar) {
+    const m = { ArrowLeft: rtl ? 1 : -1, ArrowRight: rtl ? -1 : 1, Home: -99, End: 99 }[e.key];
+    if (m) { e.preventDefault(); selectBar(Math.max(0, Math.min(11, S.bar + m)), true); }
+    return;
+  }
+  if (S.sheet) {
+    if (e.key === 'Escape') { e.preventDefault(); closeSheet(); return; }
+    if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); document.getElementById('al-save')?.click(); return; }
+    if (e.key === 'Tab') {
+      const f = [...document.querySelectorAll('#sheetLayer .sheet button:not([disabled]), #sheetLayer .sheet input')];
+      const i = f.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+    }
+  }
+});
+// drag across the 12-month chart to scrub, like Sarwa's chart handle
+let scrub = false;
+app.addEventListener('pointerdown', e => { if (e.target.closest('#bars')) scrub = true; });
+window.addEventListener('pointerup', () => { scrub = false; });
+app.addEventListener('pointermove', e => {
+  if (!scrub) return;
+  const bars = document.getElementById('bars'); if (!bars) return;
+  const r = bars.getBoundingClientRect();
+  let i = Math.floor((e.clientX - r.left) / r.width * 12); if (app.dir === 'rtl') i = 11 - i;
+  selectBar(Math.max(0, Math.min(11, i)), false);
+});
+
+document.getElementById('chips').addEventListener('click', e => { const b = e.target.closest('[data-chip]'); if (b) jump(b.dataset.chip); });
+document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+function setLang(l) {
+  S.lang = l; app.dir = l === 'ar' ? 'rtl' : 'ltr'; app.lang = l === 'ar' ? 'ar' : 'en';
+  document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === l)));
+  refresh();
+}
+
+// pitch is always open on desktop, collapsible on phones
+const mq = matchMedia('(min-width: 768px)'), more = document.getElementById('pitchMore');
+const syncPitch = () => { if (mq.matches) more.open = true; };
+mq.addEventListener('change', syncPitch); syncPitch();
+
+// deep links for screenshots: ?screen=trade|calendar|year|holding|alert|covers&t=AAPL&add=20000&basis=gross&dir=rtl&month=1&day=2026-12-15
+const q = new URLSearchParams(location.search);
+if (q.get('t') && BY_T[q.get('t')]) S.holding = q.get('t');
+if (q.get('basis') === 'gross') S.basis = 'gross';
+if (q.get('add')) S.add = Math.max(0, Math.min(60000, +q.get('add') || 0));
+if (q.get('month')) S.calMonth = Math.max(0, Math.min(11, +q.get('month')));
+if (q.get('day')) { S.sel = q.get('day'); S.calMonth = monthIdx(fromKey(S.sel)); }
+if (q.get('dir') === 'rtl') setLang('ar');
+jump(['trade', 'calendar', 'year', 'holding', 'alert', 'covers'].includes(q.get('screen')) ? q.get('screen') : 'trade');
+</script>
+</body>
+</html>

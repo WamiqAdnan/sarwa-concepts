@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sarwa Feature Concepts</title>
+<meta name="description" content="Three interactive concept features for the Sarwa app: a goals and what-if planner, Zakat worked out in English and Arabic, and a passive income calendar. An independent concept, not affiliated with Sarwa.">
+<meta name="author" content="Wamiq Adnan">
+<meta name="theme-color" content="#07351A">
+<link rel="icon" href="data:,">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sarwa Feature Concepts">
+<meta property="og:description" content="Goals & What-If Planner, Zakat worked out (EN / عربي) and a Passive Income Calendar. Three working prototypes by Wamiq Adnan.">
+<meta property="og:url" content="https://wamiqadnan.github.io/sarwa-concepts/">
+<meta property="og:image" content="https://wamiqadnan.github.io/sarwa-concepts/shots/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a dark-green pitch band, sticky feature nav, then one wide section per feature (copy left, phone gallery right). Tokens follow Sarwa's site CSS. */
+:root{
+  --bg:#F8F9F9; --card:#FFFFFF; --ink:#0A140A; --ink-2:#3B443C; --muted:#5E645E; --line:#E6E7E6; --line-2:#CED0CE;
+  --brand:#07351A; --brand-hover:#106E37; --brand-ink:#F8F9F9; --pos:#2F9E5D; --link:#106E37;
+  --mint:#CFEAD9; --mint-ink:#07351A; --lime:#C5FF94; --lime-2:#70BF2D;
+  --invest:#7DC3D2; --invest-tint:#CBE7ED; --save:#FF9B82; --save-tint:#FFD7CD; --trade:#FFB932; --trade-tint:#FFEBC2;
+  --band:#07351A; --band-ink:#F8F9F9; --band-muted:#B9CBBE; --band-line:rgba(248,249,249,.18);
+  --shadow:0 1px 2px rgba(7,53,26,.04),0 12px 32px rgba(7,53,26,.08);
+  --display:'Fraunces','PP Fragment Serif',Georgia,serif;
+  --ui:'Figtree','Soleil',-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A140D; --card:#122017; --ink:#EDF2EE; --ink-2:#C4CEC6; --muted:#97A39A; --line:#213328; --line-2:#2E4536;
+  --brand:#C5FF94; --brand-hover:#D8FFB8; --brand-ink:#07351A; --pos:#6FD39A; --link:#A9E57B;
+  --mint:#1D3A28; --mint-ink:#CFEAD9; --invest-tint:#1C3439; --save-tint:#3D2620; --trade-tint:#3A2E13;
+  --band:#06291A; --band-ink:#F2F6F3; --band-muted:#A9BCAE; --band-line:rgba(242,246,243,.16);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A140D; --card:#122017; --ink:#EDF2EE; --ink-2:#C4CEC6; --muted:#97A39A; --line:#213328; --line-2:#2E4536;
+  --brand:#C5FF94; --brand-hover:#D8FFB8; --brand-ink:#07351A; --pos:#6FD39A; --link:#A9E57B;
+  --mint:#1D3A28; --mint-ink:#CFEAD9; --invest-tint:#1C3439; --save-tint:#3D2620; --trade-tint:#3A2E13;
+  --band:#06291A; --band-ink:#F2F6F3; --band-muted:#A9BCAE; --band-line:rgba(242,246,243,.16);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0;letter-spacing:-.01em}
+p{margin:0}
+a{color:var(--link)}
+:focus-visible{outline:3px solid var(--pos);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.num{font-variant-numeric:tabular-nums}
+
+/* hero */
+.hero{background:var(--band);color:var(--band-ink);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;right:-10%;top:-30%;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(197,255,148,.22),transparent 62%);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:64px 56px;position:relative}
+.hero .eyebrow{color:var(--lime)}
+.hero h1{font-weight:700;font-size:clamp(38px,5.4vw,64px);line-height:1.04;margin:14px 0 20px}
+.hero h1 em{font-style:italic;color:var(--lime)}
+.lede{font-size:18px;color:var(--band-muted);max-width:56ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;padding:0;list-style:none}
+.facts li{border:1px solid var(--band-line);border-radius:20px;padding:5px 13px;font-size:14px}
+.facts b{color:var(--lime);font-weight:600}
+.disclaim{margin-top:24px;font-size:13px;color:var(--band-muted);max-width:60ch}
+.fan{position:relative;height:520px}
+.fan img{position:absolute;width:236px;max-width:46%;top:50%;left:50%;filter:drop-shadow(0 24px 40px rgba(0,0,0,.35));transition:transform .4s ease}
+.fan img:nth-child(1){transform:translate(-118%,-46%) rotate(-7deg)}
+.fan img:nth-child(2){transform:translate(-50%,-52%);z-index:2}
+.fan img:nth-child(3){transform:translate(18%,-46%) rotate(7deg)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
+.nav .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.nav a{flex:none;text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:600;padding:8px 14px;border-radius:20px;border:1px solid transparent}
+.nav a:hover{border-color:var(--line-2)}
+.nav a.on{background:var(--brand);color:var(--brand-ink)}
+
+/* sections */
+section{padding-block:72px}
+section+section{border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:12px;max-width:760px;margin-bottom:36px}
+.sec-head .eyebrow{color:var(--pos)}
+.sec-head h2{font-size:clamp(28px,3.6vw,40px);line-height:1.12}
+.sec-head p{color:var(--ink-2);font-size:17px}
+
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:0;margin:0 0 40px;list-style:none;counter-reset:s}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;counter-increment:s;min-width:0}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--mint);color:var(--mint-ink);font-weight:700;font-size:14px;margin-bottom:12px}
+.steps h3{font-size:19px;margin-bottom:6px}
+.steps p{font-size:15px;color:var(--ink-2)}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:14.5px}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;background:color-mix(in srgb,var(--mint) 35%,var(--card))}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;white-space:nowrap}
+.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:20px;white-space:nowrap}
+.c-invest{background:var(--invest-tint);color:var(--ink)}
+.c-save{background:var(--save-tint);color:var(--ink)}
+.c-trade{background:var(--trade-tint);color:var(--ink)}
+.c-mint{background:var(--mint);color:var(--mint-ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+
+/* feature */
+.feat{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:start}
+.feat-copy{display:grid;gap:22px;min-width:0}
+.feat-copy .idx{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.06em}
+.feat-copy h2{font-size:clamp(30px,3.8vw,44px);line-height:1.06}
+.tagline{font-size:18px;color:var(--ink-2)}
+.block h3{font-family:var(--ui);font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.block p,.block li{font-size:15.5px;color:var(--ink-2)}
+.block ul{margin:0;padding-left:18px;display:grid;gap:5px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.stat b{display:block;font-family:var(--display);font-size:22px;font-weight:700;line-height:1.15;color:var(--ink)}
+.stat span{font-size:12.5px;color:var(--muted);line-height:1.35;display:block;margin-top:3px}
+.try{background:color-mix(in srgb,var(--mint) 45%,var(--card));border-radius:10px;padding:14px 16px}
+.try h3{color:var(--mint-ink)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 15px var(--ui);text-decoration:none;cursor:pointer;border:1px solid var(--brand);transition:background .15s,color .15s}
+.btn-primary{background:var(--brand);color:var(--brand-ink)}
+.btn-primary:hover{background:var(--brand-hover)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn-ghost:hover{border-color:var(--ink)}
+
+.gallery{position:sticky;top:76px;min-width:0}
+.rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 18px;scrollbar-width:thin}
+.rail figure{flex:none;width:238px;margin:0;scroll-snap-align:start}
+.rail img{display:block;width:100%;height:auto;filter:drop-shadow(0 14px 22px rgba(7,53,26,.16))}
+.rail figcaption{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.4}
+.rail figcaption b{color:var(--ink);font-weight:600;display:block}
+.rail-hint{font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;margin-top:2px}
+.rail-btns{display:flex;gap:6px}
+.rail-btns button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line-2);background:var(--card);color:var(--ink);cursor:pointer;font-size:16px}
+.rail-btns button:hover{border-color:var(--ink)}
+
+/* engineering + design */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;min-width:0}
+.card h3{font-size:19px;margin-bottom:8px}
+.card p{font-size:15px;color:var(--ink-2)}
+.card code{font-size:13px;background:var(--mint);color:var(--mint-ink);padding:1px 5px;border-radius:4px;word-break:break-word}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:28px}
+.sw{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.sw i{display:block;height:64px}
+.sw div{padding:10px 12px;font-size:13px}
+.sw b{display:block;font-weight:600}
+.sw span{color:var(--muted);font-variant-numeric:tabular-nums}
+.typepair{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.typepair .card .spec{font-size:28px;line-height:1.2;margin-bottom:8px;color:var(--ink)}
+
+footer{border-top:1px solid var(--line);padding-block:40px 56px;font-size:13px;color:var(--muted)}
+footer .wrap{display:grid;gap:10px;max-width:1180px}
+footer p{max-width:90ch}
+
+/* live prototype dialog */
+dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none}
+dialog::backdrop{background:rgba(4,20,10,.72);backdrop-filter:blur(4px)}
+.dlg{display:grid;gap:12px;justify-items:center}
+.dlg-bar{display:flex;gap:10px;align-items:center;justify-content:space-between;width:100%;color:#F2F6F3;font-size:14px}
+.dlg-bar b{font-family:var(--display);font-size:20px;font-weight:500}
+.dlg-bar .btn{border-color:rgba(242,246,243,.4);color:#F2F6F3;background:transparent;min-height:40px}
+.frame{width:390px;height:min(844px,calc(100vh - 110px));max-width:calc(100vw - 32px);border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.frame iframe{width:100%;height:100%;border:0;display:block}
+
+@media (max-width:980px){
+  .hero .wrap{grid-template-columns:1fr;padding-block:48px 32px}
+  .fan{height:400px}
+  .feat{grid-template-columns:1fr;gap:28px}
+  .gallery{position:static}
+  .cards,.typepair{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .fan{height:320px}
+  .fan img{width:160px}
+  .stats{grid-template-columns:1fr 1fr}
+  .cards,.typepair{grid-template-columns:1fr}
+  .rail figure{width:200px}
+  section{padding-block:52px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Concept work · Frontend prototypes</div>
+      <h1>Three features that give all your money <em>a place to grow</em></h1>
+      <p class="lede">Interactive prototypes for gaps in today's Sarwa app. I listed what Sarwa already ships, kept only ideas with no existing equivalent, then built each one to the app's own patterns: the five-tab bar, green line charts with a mint fill, named accounts, USD balances funded in AED, and "estimated" on every return.</p>
+      <ul class="facts">
+        <li><b class="num">3</b> working prototypes</li>
+        <li><b class="num">15</b> screens</li>
+        <li>Real Sarwa fees &amp; 1/7–7/7 risk levels</li>
+        <li>English &amp; Arabic (RTL)</li>
+        <li>Vanilla HTML, CSS &amp; JS</li>
+      </ul>
+      <p class="disclaim">An independent concept by a job applicant. Not affiliated with or endorsed by Sarwa. Figures inside the prototypes are illustrative.</p>
+    </div>
+    <div class="fan" aria-hidden="true">
+      <img src="shots/zakat-result.png" alt="">
+      <img src="shots/goal-planner-whatif.png" alt="">
+      <img src="shots/income-calendar-calendar.png" alt="">
+    </div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap" id="navlinks">
+    <a href="#approach">Approach</a>
+  </div>
+</nav>
+
+<main>
+  <section id="approach">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Approach</div>
+        <h2>Start from what Sarwa already has, then find what's missing</h2>
+        <p>Each concept reuses something Sarwa already runs (named accounts, the Halal range, Invest, Trade and Save balances, dividend reinvesting), so it adds a new front end to existing plumbing instead of a new product.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Read the product</h3><p>The sarwa.co product and pricing pages, its stylesheet, the App Store listing and screenshots, and all 321 public help-centre articles.</p></li>
+        <li><h3>Check for gaps</h3><p>Listed every shipped feature, then searched the help centre for each idea. An idea only stayed if nothing like it exists.</p></li>
+        <li><h3>Build to the system</h3><p>Brand tokens from the site CSS, layouts from the app screenshots, real fees and risk levels, and FSRA-era disclaimers.</p></li>
+      </ol>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Concept</th><th>Product</th><th>Builds on</th><th>Gap it fills</th></tr></thead>
+          <tbody id="maptable"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div id="features"></div>
+
+  <section id="engineering">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Engineering</div>
+        <h2>Built the way I'd build them for production</h2>
+        <p>Each prototype is one self-contained file with no framework and no build step. The choices below carry straight over to a React or React Native codebase.</p>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>One state, pure renders</h3><p>A single state object feeds every screen, and each screen is a pure render of it. In React that maps to a reducer plus memoised selectors, which keeps the maths testable away from the UI.</p></div>
+        <div class="card"><h3>Maths you can check</h3><p>The goal planner works out each month's mean and variance in closed form and fits a lognormal for the 10th, 50th and 90th percentiles. It agrees with a 40,000-path Monte Carlo to about 1%. Money is held in integer cents, and the formulas sit in a comment at the top of each script.</p></div>
+        <div class="card"><h3>Hand-drawn SVG charts</h3><p>No chart library. Charts scrub with pointer or arrow keys, and an <code>aria-live</code> readout announces the value. Chart ticks and labels come from one scale.</p></div>
+        <div class="card"><h3>Arabic and right-to-left</h3><p>Layouts use logical CSS properties, so an <code>EN / ع</code> toggle mirrors the app cleanly. Figures and time-series charts stay left to right, as Arabic finance apps do.</p></div>
+        <div class="card"><h3>States you can link to</h3><p>Screens and edge states open from the URL, e.g. <code>?screen=whatif</code> or <code>?state=error</code>. Design review and QA can land on a loading, empty, error or no-permission state in one click.</p></div>
+        <div class="card"><h3>Accessible by default</h3><p>Tap targets of 44px and up, visible focus rings, labelled sliders, and sheets that close on Escape and give focus back. Motion respects reduced-motion settings.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="priority">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">If I were sequencing them</div>
+        <h2>What I'd ship first, and why</h2>
+        <p>My own estimate from the outside. Effort is relative, and the dependency column is what I'd expect to need from backend, data or compliance.</p>
+      </div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Order</th><th>Concept</th><th>Effort</th><th>Main dependency</th><th>Why here</th></tr></thead>
+          <tbody>
+            <tr><td class="num">1</td><td>Goals &amp; What-If Planner</td><td><span class="chip c-mint">Medium</span></td><td>Three new fields per account; projection runs on the client</td><td>Mostly frontend work, and the one-tap fix feeds straight into auto-deposits, so it moves net deposits.</td></tr>
+            <tr><td class="num">2</td><td>Zakat, worked out</td><td><span class="chip c-mint">Small–Medium</span></td><td>Read-only balances that already exist; Shariah review of the method</td><td>Ramadan gives it a launch date every year, and it speaks directly to Halal-portfolio customers.</td></tr>
+            <tr><td class="num">3</td><td>Passive Income Calendar</td><td><span class="chip c-mint">Medium</span></td><td>Dividend calendar feed from the broker; an alert service for price targets</td><td>Fills the custom price-alert gap and shows the after-tax figure UAE residents actually receive.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="design">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Design fidelity</div>
+        <h2>Sarwa's own tokens, not lookalikes</h2>
+        <p>Colours come from sarwa.co's stylesheet. The brand fonts are licensed, so each has a free stand-in with a similar shape.</p>
+      </div>
+      <div class="swatches" id="swatches"></div>
+      <div class="typepair">
+        <div class="card"><div class="spec" style="font-family:var(--display)">Give it a finish line</div><h3>Headlines</h3><p>PP Fragment Serif on Sarwa; Fraunces here.</p></div>
+        <div class="card"><div class="spec" style="font-family:var(--ui);font-weight:600">Add Funds · $1,750.00</div><h3>Interface</h3><p>Soleil on Sarwa; Figtree here, with tabular figures for money.</p></div>
+        <div class="card"><div class="spec" style="font-family:'IBM Plex Sans Arabic',var(--ui)" lang="ar" dir="rtl">زكاتك، محسوبة</div><h3>Arabic</h3><p>29LT Zarid Sans on Sarwa; IBM Plex Sans Arabic here.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Concept prototypes by a job applicant.</b> Not affiliated with or endorsed by Sarwa. Figures are illustrative, and the estimated returns per risk level are my own assumptions, not Sarwa's.</p>
+    <p>All investing involves risk, including the possible loss of money you invest. Past performance is no guarantee of future results. Dividends are not guaranteed.</p>
+    <p>Sources: sarwa.co product, pricing and disclaimer pages and stylesheet; the Sarwa App Store listing and screenshots; help.sarwa.co articles. Researched November 2026.</p>
+  </div>
+</footer>
+
+<dialog id="live" aria-label="Live prototype">
+  <div class="dlg">
+    <div class="dlg-bar"><b id="live-title">Prototype</b><span style="display:flex;gap:8px"><a class="btn" id="live-open" target="_blank" rel="noopener">Open full page ↗</a><button class="btn" id="live-close" type="button">Close</button></span></div>
+    <div class="frame"><iframe id="live-frame" title="Live prototype" loading="lazy"></iframe></div>
+  </div>
+</dialog>
+
+<script>
+const F = [
+  { slug:'goal-planner', title:'Goals & What-If Planner', products:[['Invest','c-invest']],
+    tagline:'Your accounts already have names. Give them a finish line.',
+    problem:'Sarwa Invest accounts carry names like “New House 🏠” but no target amount, date or projection, so nobody can tell whether their auto-deposit gets them there.',
+    why:'Named accounts, weekly, monthly and quarterly auto-deposits, and the seven risk levels already exist. A goal is three new fields, and the fix routes straight into the auto-deposit flow.',
+    how:['Invest Home shows a progress bar and an On track or Behind chip on every account with a goal.','Set a target, date, starting balance, deposit frequency, portfolio and risk level.','The what-if screen draws pessimistic, expected and optimistic paths against the target, with Sarwa\'s tiered fees (0.85% down to 0.4%, $7 monthly minimum) taken off.','When you\'re behind, it works out the smallest deposit that gets you back on track and shows it in AED and USD.'],
+    stats:[['33% → 71%','chance of reaching the goal after the one-tap fix'],['10/50/90','percentile bands on the fan chart'],['2.5%','inflation toggle for today\'s money']],
+    tryit:'On the What-if screen, drag the risk and deposit sliders and watch the chart and probability move. Then tap Add $475.',
+    builds:'Named accounts, auto-deposits, risk levels', gap:'No targets or on-track projection (Wealthfront Path and Betterment have them)',
+    shots:[['home','Invest Home','Goal progress on each account'],['goal','Set a goal','Target, date, deposit, risk'],['whatif','What-if planner','Fan chart and live sliders'],['confirm','Update auto-deposit','AED ⇄ USD summary'],['done','Back on track','Confirmation with updated goal']] },
+  { slug:'zakat', title:'Zakat, worked out', products:[['Invest','c-invest'],['Trade','c-trade'],['Save','c-save']],
+    tagline:'Your Zakat across Invest, Trade and Save in about a minute, counted the way you follow.',
+    problem:'Halal investors pay Zakat every year, but today they copy balances out of three Sarwa products, guess how shares should count, look up the gold price and do the 2.5% in a spreadsheet.',
+    why:'Sarwa already runs a Halal portfolio, Save Halal and a Shariah Screener, and holds every number this needs. Ramadan gives a yearly moment when MENA customers want this answer.',
+    how:['A Ramadan countdown card on Home, plus a permanent item under Account.','Holdings arrive already filled in from Invest, Trade and Save, each with its own switch.','Choose how shares count: full market value, or the 30% method for long-term holdings. Add bank cash, gold and money owed, and take off short-term debts.','Check against nisab on a gold (85 g) or silver (595 g) basis, then get 2.5% in USD and AED with a reminder for next year\'s hawl date.'],
+    stats:[['$2,538.26','Zakat due on $101,530.49 in the sample'],['2 methods','for counting shares, chosen by the user'],['EN / ع','full Arabic, right to left']],
+    tryit:'On Your assets, switch the shares method to the 30% proxy, then switch Nisab to silver. Tap ع to see the whole flow in Arabic.',
+    builds:'Halal portfolio, Save Halal, Shariah Screener', gap:'No Zakat tool anywhere in Sarwa today',
+    shots:[['home','Home','Ramadan countdown card'],['assets','Your assets','Pulled from all three products'],['nisab','Nisab','Gold or silver basis'],['result','Your Zakat','USD and AED with breakdown'],['result-ar','Arabic','Same screen, right to left']] },
+  { slug:'income-calendar', title:'Passive Income Calendar', products:[['Trade','c-trade']],
+    tagline:'See when your dividends land, what you keep after tax, and what they pay for.',
+    problem:'Sarwa Trade customers can reinvest dividends and browse a Dividend list, but can\'t see when payouts land, how much they keep after US withholding, which ex-date to hold through, or set an alert at their own price.',
+    why:'It builds on dividend reinvesting and the Dividend list, shows the net figure UAE residents actually receive, and fills the custom price-alert gap that Market Alerts leaves.',
+    how:['A card on the Trade summary shows this month\'s estimated income and a 12-month sparkline.','A month calendar marks ex-dividend dates as rings and pay dates as amounts. Tap a day to see which holdings pay.','A net/gross switch applies 30% US withholding (illustrative), and the 12-month view stacks what you keep against what is withheld.','Holding detail adds yield, frequency, next ex-date and a custom price-target alert, and “What it covers” maps income to everyday AED bills.'],
+    stats:[['$859.28','estimated net income over 12 months, from $1,227.64 gross'],['38','payouts across 8 holdings'],['30%','US withholding shown, illustrative']],
+    tryit:'Flip Net and Gross on the calendar, tap a pay date, then open What it covers and drag the SCHD slider.',
+    builds:'Dividend reinvesting, Dividend list, Market Alerts', gap:'No income calendar and no custom price-target alerts',
+    shots:[['trade','Trade','Entry card on the summary'],['calendar','Income calendar','Ex-dates and pay dates'],['year','12 months','What you keep vs withheld'],['holding','Holding detail','Yield, ex-date, price alert'],['covers','What it covers','Income against everyday bills']] }
+];
+
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const chips = f => f.products.map(([n,c]) => `<span class="chip ${c}">${n}</span>`).join('');
+
+document.getElementById('maptable').innerHTML = F.map(f =>
+  `<tr><td><a href="#${f.slug}">${esc(f.title)}</a></td><td><div class="chips">${chips(f)}</div></td><td>${esc(f.builds)}</td><td>${esc(f.gap)}</td></tr>`).join('');
+
+document.getElementById('features').innerHTML = F.map((f,i) => `
+<section id="${f.slug}">
+  <div class="wrap feat">
+    <div class="feat-copy">
+      <div class="chips"><span class="idx num">CONCEPT ${i+1} OF ${F.length}</span>${chips(f)}</div>
+      <h2>${esc(f.title)}</h2>
+      <p class="tagline">${esc(f.tagline)}</p>
+      <div class="stats">${f.stats.map(([b,s]) => `<div class="stat"><b class="num">${esc(b)}</b><span>${esc(s)}</span></div>`).join('')}</div>
+      <div class="block"><h3>The problem</h3><p>${esc(f.problem)}</p></div>
+      <div class="block"><h3>Why it fits Sarwa</h3><p>${esc(f.why)}</p></div>
+      <div class="block"><h3>How it works</h3><ul>${f.how.map(h => `<li>${esc(h)}</li>`).join('')}</ul></div>
+      <div class="block try"><h3>Try this</h3><p>${esc(f.tryit)}</p></div>
+      <div class="actions">
+        <button class="btn btn-primary" type="button" data-live="${f.slug}" data-title="${esc(f.title)}">Try the live prototype</button>
+        <a class="btn btn-ghost" href="features/${f.slug}/index.html" target="_blank" rel="noopener">Open with design notes ↗</a>
+      </div>
+    </div>
+    <div class="gallery">
+      <div class="rail" id="rail-${f.slug}" tabindex="0" aria-label="${esc(f.title)} screens">
+        ${f.shots.map(([k,t,c]) => `<figure><img src="shots/${f.slug}-${k}.png" alt="${esc(f.title)}: ${esc(t)} screen" loading="lazy" width="520" height="1090"><figcaption><b>${esc(t)}</b>${esc(c)}</figcaption></figure>`).join('')}
+      </div>
+      <div class="rail-hint"><span class="num">${f.shots.length} screens</span><span class="rail-btns"><button type="button" aria-label="Previous screens" data-rail="${f.slug}" data-dir="-1">←</button><button type="button" aria-label="Next screens" data-rail="${f.slug}" data-dir="1">→</button></span></div>
+    </div>
+  </div>
+</section>`).join('');
+
+document.getElementById('navlinks').insertAdjacentHTML('beforeend',
+  F.map(f => `<a href="#${f.slug}">${esc(f.title)}</a>`).join('') +
+  '<a href="#engineering">Engineering</a><a href="#priority">Priorities</a><a href="#design">Design</a>');
+
+const SW = [['Primary','#07351A','buttons, active pills'],['Primary hover','#106E37',''],['Positive','#2F9E5D','gains'],['Mint','#CFEAD9','chart fill, tints'],['Lime','#C5FF94','glow, highlights'],['Surface','#F8F9F9','app background'],['Invest','#7DC3D2','product accent'],['Save','#FF9B82','product accent'],['Trade','#FFB932','product accent']];
+document.getElementById('swatches').innerHTML = SW.map(([n,h,u]) =>
+  `<div class="sw"><i style="background:${h}"></i><div><b>${n}</b><span>${h}</span>${u ? ` · <span>${u}</span>` : ''}</div></div>`).join('');
+
+document.addEventListener('click', e => {
+  const r = e.target.closest('[data-rail]');
+  if (r) { const el = document.getElementById('rail-' + r.dataset.rail); el.scrollBy({ left: +r.dataset.dir * 256, behavior: 'smooth' }); }
+  const l = e.target.closest('[data-live]');
+  if (l) {
+    const url = `features/${l.dataset.live}/index.html`;
+    document.getElementById('live-title').textContent = l.dataset.title;
+    document.getElementById('live-open').href = url;
+    document.getElementById('live-frame').src = url;
+    document.getElementById('live').showModal();
+  }
+});
+const dlg = document.getElementById('live');
+document.getElementById('live-close').onclick = () => dlg.close();
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+dlg.addEventListener('close', () => { document.getElementById('live-frame').src = 'about:blank'; });
+
+// highlight the nav link for the section in view
+const links = [...document.querySelectorAll('.nav a')];
+const io = new IntersectionObserver(es => es.forEach(en => {
+  if (en.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id));
+}), { rootMargin: '-40% 0px -55% 0px' });
+document.querySelectorAll('main section[id]').forEach(s => io.observe(s));
+</script>
+</body>
+</html>
