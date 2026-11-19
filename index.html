@@ -86,12 +86,6 @@ section+section{border-top:1px solid var(--line)}
 .sec-head h2{font-size:clamp(28px,3.6vw,40px);line-height:1.12}
 .sec-head p{color:var(--ink-2);font-size:17px}
 
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:0;margin:0 0 40px;list-style:none;counter-reset:s}
-.steps li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;counter-increment:s;min-width:0}
-.steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--mint);color:var(--mint-ink);font-weight:700;font-size:14px;margin-bottom:12px}
-.steps h3{font-size:19px;margin-bottom:6px}
-.steps p{font-size:15px;color:var(--ink-2)}
-
 .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
 table{border-collapse:collapse;width:100%;min-width:720px;font-size:14.5px}
 th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -173,7 +167,6 @@ dialog::backdrop{background:rgba(4,20,10,.72);backdrop-filter:blur(4px)}
   .feat{grid-template-columns:1fr;gap:28px}
   .gallery{position:static}
   .cards,.typepair{grid-template-columns:1fr 1fr}
-  .steps{grid-template-columns:1fr}
 }
 @media (max-width:600px){
   .fan{height:320px}
@@ -193,7 +186,7 @@ dialog::backdrop{background:rgba(4,20,10,.72);backdrop-filter:blur(4px)}
     <div>
       <div class="eyebrow">Concept work · Frontend prototypes</div>
       <h1>Three features that give all your money <em>a place to grow</em></h1>
-      <p class="lede">Interactive prototypes for gaps in today's Sarwa app. I listed what Sarwa already ships, kept only ideas with no existing equivalent, then built each one to the app's own patterns: the five-tab bar, green line charts with a mint fill, named accounts, USD balances funded in AED, and "estimated" on every return.</p>
+      <p class="lede">Interactive prototypes for gaps in today's Sarwa app, each built to the app's own patterns: the five-tab bar, green line charts with a mint fill, named accounts, USD balances funded in AED, and "estimated" on every return.</p>
       <ul class="facts">
         <li><b class="num">3</b> working prototypes</li>
         <li><b class="num">15</b> screens</li>
@@ -213,7 +206,7 @@ dialog::backdrop{background:rgba(4,20,10,.72);backdrop-filter:blur(4px)}
 
 <nav class="nav" aria-label="Sections">
   <div class="wrap" id="navlinks">
-    <a href="#approach">Approach</a>
+    <a href="#approach">Overview</a>
   </div>
 </nav>
 
@@ -221,15 +214,10 @@ dialog::backdrop{background:rgba(4,20,10,.72);backdrop-filter:blur(4px)}
   <section id="approach">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow">Approach</div>
-        <h2>Start from what Sarwa already has, then find what's missing</h2>
-        <p>Each concept reuses something Sarwa already runs (named accounts, the Halal range, Invest, Trade and Save balances, dividend reinvesting), so it adds a new front end to existing plumbing instead of a new product.</p>
+        <div class="eyebrow">Overview</div>
+        <h2>Each one builds on something Sarwa already runs</h2>
+        <p>Named accounts, the Halal range, Invest, Trade and Save balances, dividend reinvesting: each concept adds a new front end to existing plumbing instead of a new product.</p>
       </div>
-      <ol class="steps">
-        <li><h3>Read the product</h3><p>The sarwa.co product and pricing pages, its stylesheet, the App Store listing and screenshots, and all 321 public help-centre articles.</p></li>
-        <li><h3>Check for gaps</h3><p>Listed every shipped feature, then searched the help centre for each idea. An idea only stayed if nothing like it exists.</p></li>
-        <li><h3>Build to the system</h3><p>Brand tokens from the site CSS, layouts from the app screenshots, real fees and risk levels, and FSRA-era disclaimers.</p></li>
-      </ol>
       <div class="tbl">
         <table>
           <thead><tr><th>Concept</th><th>Product</th><th>Builds on</th><th>Gap it fills</th></tr></thead>
@@ -299,9 +287,7 @@ dialog::backdrop{background:rgba(4,20,10,.72);backdrop-filter:blur(4px)}
 <footer>
   <div class="wrap">
     <p><b>Concept prototypes by a job applicant.</b> Not affiliated with or endorsed by Sarwa. Figures are illustrative, and the estimated returns per risk level are my own assumptions, not Sarwa's.</p>
-    <p>All investing involves risk, including the possible loss of money you invest. Past performance is no guarantee of future results. Dividends are not guaranteed.</p>
-    <p>Sources: sarwa.co product, pricing and disclaimer pages and stylesheet; the Sarwa App Store listing and screenshots; help.sarwa.co articles. Researched November 2026.</p>
-  </div>
+    <p>All investing involves risk, including the possible loss of money you invest. Past performance is no guarantee of future results. Dividends are not guaranteed.</p>  </div>
 </footer>
 
 <dialog id="live" aria-label="Live prototype">
